@@ -1,5 +1,10 @@
 <script>
 export default {
+  data () {
+    return {
+      token: 1
+    }
+  },
   created () {
     // 调用API从本地缓存中获取数据
     /*
