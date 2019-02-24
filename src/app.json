@@ -1,7 +1,10 @@
 {
   "pages": [
     
+    "pages/loading/main",
     "pages/index/main",
+    "pages/loading1/main",
+    "pages/homepage/main",
     "pages/logs/main",
     "pages/counter/main"
   ],

@@ -44,6 +44,7 @@
         }
       },
       getSetting () {
+      	const url = '../homepage/main'
         wx.getSetting({
           success: function (res) {
             if (res.authSetting['scope.userInfo']) {
@@ -53,7 +54,9 @@
                   var encryptData = res.encryptedData
                   console.log(res)
                   // 用户已经授权过
+                  wx.navigateTo({url})
                   console.log('用户已经授权过')
+                  
                   wx.login({
                     success (res) {
                       if (res.code) {
