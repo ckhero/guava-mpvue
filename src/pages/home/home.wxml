@@ -1,0 +1,21 @@
+<text style='margin-left:100rpx;margin-bottom: 20rpx;'>允许微信授权后，开启你的答题之旅</text>
+<view class="page">
+  <view class='top'>
+      <image class='userPic' src='../../../static/images/user.png' ></image>
+  </view>
+
+  <view class='item'>姓名：{{realName}}</view>
+  <view class='item'>部门：{{department}}</view>
+  <view class='item'>工号：{{workNumber}}</view>
+  <view class='item'>次数：{{frequency1}} | {{frequency2}} | {{frequency3}}</view>
+  <view class='item'>总分：{{QB1AllScore}} | {{QB2AllScore}} | {{QB2AllScore}}</view>
+  <view class='item'>上次答题：{{lastTime}}</view>
+
+  <view style='display:flex; align-items:center; justify-content:space-around;'>
+    <view class='feedBack' bindtap='feedBack'>问题反馈</view>
+  </view>
+  
+
+
+ 
+</view>
