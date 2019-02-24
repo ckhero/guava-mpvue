@@ -6,6 +6,8 @@
 
 <script>
   import card from '@/components/card'
+  import global_ from '@/components/global'
+  import request from '@/utils/request'
 
   export default {
     data () {
@@ -36,25 +38,28 @@
         }
       },
       getSetting () {
-        console.log(22222)
-        console.log(22222)
         wx.getSetting({
           success: function (res) {
             if (res.authSetting['scope.userInfo']) {
               wx.getUserInfo({
                 success: function (res) {
-                  console.log(res.userInfo)
+                  var iv = res.iv
+                  var encryptData = res.encryptedData
+                  console.log(res)
                   // 用户已经授权过
                   console.log('用户已经授权过')
                   wx.login({
                     success (res) {
                       if (res.code) {
-                        // 发起网络请求
-                        wx.request({
-                          url: 'http://guava.com/v1/user/login',
+                        request.post({
+                          url: request.loginUrl,
                           data: {
-                            code: res.code
+                            'code': res.code,
+                            'iv': iv,
+                            'encrypt_data': encryptData
                           }
+                        }).then(res => {
+                          global_.xToken = res.data.token
                         })
                       } else {
                         console.log('登录失败！' + res.errMsg)
