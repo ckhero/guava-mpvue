@@ -8,33 +8,14 @@
   import request from '@/utils/request'
 
   export default {
-    data () {
-      return {
-        motto: 'Hello miniprograme',
-        userInfo: {
-          nickName: 'mpvue',
-          avatarUrl: 'http://mpvue.com/assets/logo.png'
-        }
-      }
-    },
-
-    components: {
-      card
-    },
+    
 
     mounted () {
       this.getSetting()
     },
 
     methods: {
-      bindViewTap () {
-        const url = '../logs/main'
-        if (mpvuePlatform === 'wx') {
-          mpvue.switchTab({ url })
-        } else {
-          mpvue.navigateTo({ url })
-        }
-      },
+      
       getSetting () {
       	const url = '../homepage/main'
       	
@@ -79,16 +60,7 @@
           }
         })
       },
-      getUserInfo1 () {
-        console.log('click事件首先触发')
-        // 判断小程序的API，回调，参数，组件等是否在当前版本可用。  为false 提醒用户升级微信版本
-        // console.log(wx.canIUse('button.open-type.getUserInfo'))
-        if (wx.canIUse('button.open-type.getUserInfo')) {
-          // 用户版本可用
-        } else {
-          console.log('请升级微信版本')
-        }
-      },
+      
       bindGetUserInfo (e) {
         // console.log(e.mp.detail.rawData)
         if (e.mp.detail.rawData) {

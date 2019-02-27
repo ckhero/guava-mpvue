@@ -3,6 +3,8 @@ import global_ from '@/components/global'
 const host = 'https://guava.51qwer.com'
 const loginUrl = '/v1/user/login' // 登陆链接
 const userInfoUrl = '/v1/user/info' // 登陆链接
+const rankListUrl='/v1/rank/list'
+const examUrl='v1/examination/save'
 
 // const userInfoUrl = '/v1/user/info' // 用户信息
 
