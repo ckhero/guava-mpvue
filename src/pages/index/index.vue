@@ -7,7 +7,7 @@
     </view>
     <button plain="true" class='home' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 10rpx;color: #ffffff;font-size: 40rpx;" >授权登录</button>
   </div>
-  
+
 </template>
 
 <script>
@@ -23,7 +23,7 @@
     components: {},
 
     mounted () {
-      this.getSetting()
+      // this.getSetting()
     },
 
     methods: {
@@ -48,7 +48,7 @@
                   // 用户已经授权过
                   wx.navigateTo({url})
                   console.log('用户已经授权过')
-                  
+
                   wx.login({
                     success (res) {
                       if (res.code) {

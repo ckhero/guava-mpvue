@@ -5,6 +5,7 @@ function getRandColor () {
 export default
 {
   xToken: null,
-  getRandColor
+  getRandColor,
+  homePageUrl: '../homepage/main'
 }
 </script>
