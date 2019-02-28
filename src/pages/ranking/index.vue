@@ -4,17 +4,17 @@
 	<view class="page">
   
   <scroll-view  class='messScroll' scroll-y  bindscrolltolower="" >
-    <view class='rankList' wx:for="rankList" bindtap='' data-index="index">
+    <view class='rankList' :wx:for="rankList" wx:for-item="i" bindtap='' data-index="index">
     <view class="item">
-      <image class="userPhoto"    src="/static/images/user.png" />
+      <img class="userPhoto"    :src="i.head_img" />
       <view class='middle'>
-          
+          {{i.name}}
       </view>
       <view class='score'>
-          
+          {{i.point}}
       </view>
       <view class='frequency'>
-            
+            {{i.levle_name}}
       </view>
           
       </view>
@@ -33,7 +33,9 @@
   export default {
     data () {
     	return {
-
+    	rankList:null,
+     
+     
     	}
     },
 
@@ -50,8 +52,9 @@
 	          data: {
 	          }
 	        }).then(res => {
-
-           console.log(res)
+           this.head_img=res.data.head_img
+           this.rankList=res.data
+           console.log(res.data)
 	         
 
 	        })

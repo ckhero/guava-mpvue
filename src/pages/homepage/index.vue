@@ -3,8 +3,9 @@
     <view class='top-left'>
       <img class='userPic' :src='head'/>
       <view class=''>
+      	
         <view class='item'>姓名：{{name}}</view>
-        <view class='item'>累计打卡：{{sign_day}} | 积分：{{point}} | <a href="../ranking/main" target="_blank">排名：{{rank}}</a>
+        <view class='item'>累计打卡：{{sign_day}} | 积分：{{point}} | <a href="../ranking/main" target="_blank" style="text-decoration: underline">排名：{{rank}}</a>
         </view>
       </view>
 
@@ -13,7 +14,7 @@
     <view class='answer'>网址：{{}}</view>
     <view class='top-left'>
       <view style="margin-left: 20rpx;">挑战课程:</view>
-      <view class='item'><a href="../ranking/main" target="_blank" class="allclass">全部课程 ></a></view>
+      <view class='item'><a href="../learn/main" target="_blank" class="allclass">全部课程 ></a></view>
     </view>
     <view class='row'>
       <view class='study'>英语{{frequency1}}</view>
@@ -128,7 +129,7 @@
  .study{
  	width: 300rpx;
  	height: 150rpx;
- 	margin-left: 40rpx;
+ 	margin-left: 20rpx;
  	margin-top: 40rpx;
   background-color: #ff9800;
   border-radius: 15rpx;
