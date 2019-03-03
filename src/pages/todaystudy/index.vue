@@ -1,8 +1,8 @@
 <template>
 <view class="page">
   <image class="userPhoto"  :src="img_url"  mode="widthFix" />
- <button  @click="toanswer" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 80rpx;color: #ffffff;font-size: 40rpx;" >进入答题</button>
-</view>
+  <i-button bind:click="toanswer" type="primary" long="true" size	="large" i-class="buttonAnswer">开始答题</i-button>
+、</view>
 
 </template>
 
@@ -15,9 +15,6 @@ export default {
     }
   },
   onLoad (options) {
-    wx.setNavigationBarTitle({
-      title: '今日知识点回顾' // 页面标题为路由参数
-    })
     this.getLessonDetail(options['id'])
   },
   methods: {
@@ -40,5 +37,9 @@ export default {
 	.userPhoto{
     width: 100%;
   }
-
+  .buttonAnswer{
+    position:fixed !important;
+    bottom:0px !important;
+    width:100% !important;
+  }
 </style>
