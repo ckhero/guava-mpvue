@@ -3,6 +3,7 @@
 </template>
 
 <script>
+  import {setToken, getToken} from '@/utils/token'
   export default {
 
     mounted () {
@@ -24,6 +25,10 @@
                   console.log(res)
                   // 用户已经授权过
                   console.log('用户已经授权过22')
+                  if (getToken()) {
+                    wx.navigateTo({ url })
+                    return true
+                  }
                   wx.login({
                     success (res) {
                       if (res.code) {
@@ -32,11 +37,10 @@
                           'iv': iv,
                           'encrypt_data': encryptData
                         }).then(res => {
-                          self.global.xToken = res.data.token
+                          setToken(res.data.token)
                           wx.navigateTo({ url })
                         })
                       } else {
-
                         console.log('登录失败！' + res.errMsg)
                       }
                     }

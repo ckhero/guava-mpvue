@@ -15,11 +15,12 @@ export default {
     }
   },
   onLoad (options) {
+    this.lesson_id = options['id']
     this.getLessonDetail(options['id'])
   },
   methods: {
     toanswer () {
-      const url = '../answer/main'
+      const url = '../examination/main?id=' + this.lesson_id
       wx.navigateTo({ url })
     },
     getLessonDetail (id) {

@@ -98,7 +98,7 @@
       },
       
       switchtostudy () {
-        const url = '../learn/main'
+        const url = '../examination/main?id=11'
         wx.navigateTo({ url })
       },
       drawProgressbg(){

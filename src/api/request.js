@@ -1,5 +1,4 @@
-import global_ from '@/components/global'
-
+import {getToken} from '@/utils/token'
 const host = 'https://guava.51qwer.com/'
 
 function request (url, method = 'post', data = {}, header = {}) {
@@ -13,7 +12,7 @@ function request (url, method = 'post', data = {}, header = {}) {
       data: data,
       header: {
         'content-type': 'application/json', // 默认值
-        'x-token': global_.xToken
+        'x-token': getToken()
       },
       success: function (res) {
         wx.hideLoading()
