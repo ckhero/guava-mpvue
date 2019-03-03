@@ -17,16 +17,24 @@
       <view class='item'><a href="../learn/main" target="_blank" class="allclass">全部课程 ></a></view>
     </view>
     <view class='row'>
-      <view class='study'><text>英语 \n {{english.done}}/{{english.total}}</text></view>
+      <view class='study'><text >英语 \n {{english.done}}/{{english.total}}</text></view>
       <view class='study'><text>数学 \n {{math.done}}/{{math.total}}</text></view>
       <view class='study'><text>逻辑 \n {{logic.done}}/{{logic.total}}</text></view>
     </view>
-    <button plain="true" @click="switchtostudy"
+    <!--<button plain="true" @click="switchtostudy"
             style="border:10rpx;width: 250rpx;height: 250rpx;background-color: #5CACEE;border-radius: 125rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 80rpx;color: #ffffff;font-size: 40rpx;text-align: center;">
-      今日学习 \n {{right_type_num}}/{{type_num}}
-    </button>
-    <text class='txt'>联系客服</text>
+      今日学习 \n {{right_type_num}}/{{type_num}}-->
+       <view class='progress_box' @click="switchtostudy">
+        <canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas> 
+        <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas> 
+        <view class="progress_text">
+            <!--<view class="progress_dot"></view>--> 
+            <text class='progress_info'>完成 \n {{right_type_num}}/{{type_num}}</text>
+        </view>     
+    </view>
+     <view  class='txt'><text style="border-bottom: 2rpx solid #919191;">联系客服</text></view>
   </div>
+  
 
 </template>
 
@@ -52,26 +60,7 @@
         	done:null,
         	total:null
         },
-        lesson:{
-        	1:{
-        		lesson_id:null,
-        		lesson_type:null,
-        		lesson_name:null,
-        		status:null
-        	},
-        	2:{
-        		lesson_id:null,
-        		lesson_type:null,
-        		lesson_name:null,
-        		status:null
-        	},
-        	3:{
-        		lesson_id:null,
-        		lesson_type:null,
-        		lesson_name:null,
-        		status:null
-        	}
-        },
+        
         right_type_num:null,
         type_num:null
       }
@@ -81,7 +70,9 @@
 
     mounted () {
       this.getUserInfo(),
-      this.getCourseInfo()
+      this.getCourseInfo(),
+      this.drawProgressbg(),
+		this.drawCircle(1.5)
     },
 
     methods: {
@@ -109,7 +100,39 @@
       switchtostudy () {
         const url = '../examination/main?id=11'
         wx.navigateTo({ url })
-      }
+      },
+      drawProgressbg(){
+    // 使用 wx.createContext 获取绘图上下文 context
+    var ctx = wx.createCanvasContext('canvasProgressbg')
+    ctx.setLineWidth(4);// 设置圆环的宽度
+    ctx.setStrokeStyle('#c0c0c0'); // 设置圆环的颜色
+    ctx.setLineCap('round') // 设置圆环端点的形状
+    ctx.beginPath();//开始一个新的路径
+    ctx.arc(102.5, 102.5, 75, 0, 2 * Math.PI, false);
+    //设置一个原点(100,100)，半径为90的圆的路径到当前路径
+    ctx.stroke();//对当前路径进行描边
+    ctx.draw();
+  },
+// onReady() {
+//  this.drawProgressbg(); 
+//},
+  drawCircle(step){  
+    var context = wx.createCanvasContext('canvasProgress');
+      // 设置渐变
+      var gradient = context.createLinearGradient(150, 75, 75, 150);
+      gradient.addColorStop("0", "#2661DD");
+      gradient.addColorStop("0.5", "#40ED94");
+      gradient.addColorStop("1.0", "#5956CC");
+      
+      context.setLineWidth(10);
+      context.setStrokeStyle(gradient);
+      context.setLineCap('round')
+      context.beginPath(); 
+      // 参数step 为绘制的圆环周长，从0到2为一周 。 -Math.PI / 2 将起始角设在12点钟位置 ，结束角 通过改变 step 的值确定
+      context.arc(102.5, 102.5, 75, -Math.PI / 2, step * Math.PI - Math.PI / 2, false);
+      context.stroke(); 
+      context.draw() 
+  }
     },
 
     created () {
@@ -119,6 +142,46 @@
 </script>
 
 <style>
+	.progress_box{
+  
+  
+  width:165px;
+  height: 165px;  
+  margin-left: 180rpx;
+  margin-top: 100rpx;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+
+  
+}
+.progress_bg{
+  position: absolute;
+    width:165px;
+  height: 165px; 
+}
+.progress_canvas{ 
+  width:165px;
+  height: 165px; 
+} 
+.progress_text{ 
+  position: absolute; 
+    
+  align-items: center;
+  justify-content: center
+}
+.progress_info{   
+  font-size: 36rpx;
+  text-align: center;
+  padding-left: 14rpx;
+  letter-spacing: 2rpx
+} 
+.progress_dot{
+  width:16rpx;
+  height: 16rpx;  
+  border-radius: 50%;
+  background-color: #fb9126;
+}
   .row {
     display: flex;
     width: 600 rpx;
@@ -134,9 +197,9 @@
     .txt{
     	margin-top: 100rpx;
     	margin-left: 300rpx;
-
-    	align-items: center;
-    	border-bottom: 2rpx solid #919191;
+    
+    
+    	
     }
     .item{
 
