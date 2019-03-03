@@ -13,19 +13,25 @@
 
 <script>
 	 export default {
+     onShareAppMessage: function () {
+       return {
+         title: '答题成功',
+         path: '/page/user?id=123'
+       }
+     },
     data () {
-      	
+
       return {
       	status:null,
       	point:null
       }
-      
+
     },
 
     components: {},
 
     mounted () {
-     
+
     },
 
     methods: {
@@ -54,7 +60,7 @@
     created () {
       // let app = getApp()
     }
-  }  
+  }
 </script>
 
 <style>

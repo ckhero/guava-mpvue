@@ -25,33 +25,33 @@
                   console.log(res)
                   // 用户已经授权过
                   console.log('用户已经授权过22')
-                  if (getToken()) {
+                  if (getToken() === '') {
+                    wx.login({
+                      success (res) {
+                        if (res.code) {
+                          self.api.v1.user.login({
+                            'code': res.code,
+                            'iv': iv,
+                            'encrypt_data': encryptData
+                          }).then(res => {
+                            setToken(res.data.token)
+                            wx.navigateTo({ url })
+                          })
+                        } else {
+                          console.log('登录失败！' + res.errMsg)
+                        }
+                      }
+                    })
+                  } else {
                     wx.navigateTo({ url })
                     return true
                   }
-                  wx.login({
-                    success (res) {
-                      if (res.code) {
-                        self.api.v1.user.login({
-                          'code': res.code,
-                          'iv': iv,
-                          'encrypt_data': encryptData
-                        }).then(res => {
-                          setToken(res.data.token)
-                          wx.navigateTo({ url })
-                        })
-                      } else {
-                        console.log('登录失败！' + res.errMsg)
-                      }
-                    }
-                  })
                 }
               })
             } else {
               const url = '../index/main'
               wx.navigateTo({ url })
               console.log('用户还未授权过')
-
             }
           }
         })

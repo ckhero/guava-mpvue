@@ -25,16 +25,16 @@
             style="border:10rpx;width: 250rpx;height: 250rpx;background-color: #5CACEE;border-radius: 125rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 80rpx;color: #ffffff;font-size: 40rpx;text-align: center;">
       今日学习 \n {{right_type_num}}/{{type_num}}-->
        <view class='progress_box' @click="switchtostudy">
-        <canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas> 
-        <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas> 
+        <canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas>
+        <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas>
         <view class="progress_text">
-            <!--<view class="progress_dot"></view>--> 
+            <!--<view class="progress_dot"></view>-->
             <text class='progress_info'>完成 \n {{right_type_num}}/{{type_num}}</text>
-        </view>     
+        </view>
     </view>
      <view  class='txt'><text style="border-bottom: 2rpx solid #919191;">联系客服</text></view>
   </div>
-  
+
 
 </template>
 
@@ -60,7 +60,7 @@
         	done:null,
         	total:null
         },
-        
+
         right_type_num:null,
         type_num:null
       }
@@ -96,9 +96,9 @@
       		console.log(res)
       	})
       },
-      
+
       switchtostudy () {
-        const url = '../examination/main?id=11'
+        const url = '../ansresult/main?id=11'
         wx.navigateTo({ url })
       },
       drawProgressbg(){
@@ -114,24 +114,24 @@
     ctx.draw();
   },
 // onReady() {
-//  this.drawProgressbg(); 
+//  this.drawProgressbg();
 //},
-  drawCircle(step){  
+  drawCircle(step){
     var context = wx.createCanvasContext('canvasProgress');
       // 设置渐变
       var gradient = context.createLinearGradient(150, 75, 75, 150);
       gradient.addColorStop("0", "#2661DD");
       gradient.addColorStop("0.5", "#40ED94");
       gradient.addColorStop("1.0", "#5956CC");
-      
+
       context.setLineWidth(10);
       context.setStrokeStyle(gradient);
       context.setLineCap('round')
-      context.beginPath(); 
+      context.beginPath();
       // 参数step 为绘制的圆环周长，从0到2为一周 。 -Math.PI / 2 将起始角设在12点钟位置 ，结束角 通过改变 step 的值确定
       context.arc(102.5, 102.5, 75, -Math.PI / 2, step * Math.PI - Math.PI / 2, false);
-      context.stroke(); 
-      context.draw() 
+      context.stroke();
+      context.draw()
   }
     },
 
@@ -143,42 +143,42 @@
 
 <style>
 	.progress_box{
-  
-  
+
+
   width:165px;
-  height: 165px;  
+  height: 165px;
   margin-left: 180rpx;
   margin-top: 100rpx;
-  display: flex; 
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  
+
 }
 .progress_bg{
   position: absolute;
     width:165px;
-  height: 165px; 
+  height: 165px;
 }
-.progress_canvas{ 
+.progress_canvas{
   width:165px;
-  height: 165px; 
-} 
-.progress_text{ 
-  position: absolute; 
-    
+  height: 165px;
+}
+.progress_text{
+  position: absolute;
+
   align-items: center;
   justify-content: center
 }
-.progress_info{   
+.progress_info{
   font-size: 36rpx;
   text-align: center;
   padding-left: 14rpx;
   letter-spacing: 2rpx
-} 
+}
 .progress_dot{
   width:16rpx;
-  height: 16rpx;  
+  height: 16rpx;
   border-radius: 50%;
   background-color: #fb9126;
 }
@@ -197,9 +197,9 @@
     .txt{
     	margin-top: 100rpx;
     	margin-left: 300rpx;
-    
-    
-    	
+
+
+
     }
     .item{
 
