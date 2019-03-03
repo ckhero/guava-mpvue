@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     toanswer () {
-      const url = '../answer/main?id=' + this.lesson_id
+      const url = '../examination/main?id=' + this.lesson_id
       wx.navigateTo({ url })
     },
     getLessonDetail (id) {
