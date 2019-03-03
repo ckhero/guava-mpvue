@@ -3,10 +3,9 @@
     
     <view class='learnlength'><text class=''>学习进度2/60</text></view>
     <view class='top-left'><view style="margin-left: 20rpx;">学习列表:</view><view class='item'><a href="../ranking/main" target="_blank" class="allclass">全部课程 ></a></view></view>
-    <view class='border'><view>第{{num1}}天</view>
-    	      <view class='row'><view>英文：</view><view>{{english1}}</view><view class='finish'>{{status}}</view></view>
-    	      <view class='row'><view>数学：</view><view>{{english1}}</view><view class='finish'>{{status}}</view></view>
-    	      <view class='row'><view>逻辑：</view><view>{{english1}}</view><view class='finish'>{{status}}</view></view>
+    <view class='border' :wx:for="todayData" wx:for-item="i" bindtap='' data-index="index"><view>第{{num1}}天</view>
+    	     
+    	      <view class='row'><view>逻辑：</view><view>{{i.lessons}}</view><view class='finish'>{{status}}</view></view>
     </view>
     <view class='border'><view>第{{num2}}天</view>
     	      <view class='row'><view>英文：</view><view>{{english1}}</view><view class='finish'>{{status}}</view></view>
@@ -32,11 +31,11 @@
   export default {
 	data(){
     	return {
-    		num1:null,
-    		num2:null,
-    		num3:null,
-    		english1:null,
-    		status:null
+    		todayData:null,
+    		first:null,
+    		second:null,
+    		third:null,
+    		
     	}
     },
 
@@ -49,7 +48,7 @@
     methods: {
       getTodayLesson (res) {
         this.api.v1.user.todaylesson({}).then(res => {
-
+          this.todayData=res.data
           console.log(res)
         })
       },

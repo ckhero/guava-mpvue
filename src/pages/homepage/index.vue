@@ -17,13 +17,13 @@
       <view class='item'><a href="../learn/main" target="_blank" class="allclass">全部课程 ></a></view>
     </view>
     <view class='row'>
-      <view class='study'>英语{{frequency1}}</view>
-      <view class='study'>数学{{frequency1}}</view>
-      <view class='study'>逻辑{{frequency1}}</view>
+      <view class='study'><text>英语 \n {{english.done}}/{{english.total}}</text></view>
+      <view class='study'><text>数学 \n {{math.done}}/{{math.total}}</text></view>
+      <view class='study'><text>逻辑 \n {{logic.done}}/{{logic.total}}</text></view>
     </view>
     <button plain="true" @click="switchtostudy"
             style="border:10rpx;width: 250rpx;height: 250rpx;background-color: #5CACEE;border-radius: 125rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 80rpx;color: #ffffff;font-size: 40rpx;text-align: center;">
-      今日学习
+      今日学习 \n {{right_type_num}}/{{type_num}}
     </button>
     <text class='txt'>联系客服</text>
   </div>
@@ -39,14 +39,49 @@
         sign_day: null,
         point: null,
         rank: null,
-        level: null
+        level: null,
+        english:{
+        	done:null,
+        	total:null
+        },
+        math:{
+        	done:null,
+        	total:null
+        },
+        logic:{
+        	done:null,
+        	total:null
+        },
+        lesson:{
+        	1:{
+        		lesson_id:null,
+        		lesson_type:null,
+        		lesson_name:null,
+        		status:null
+        	},
+        	2:{
+        		lesson_id:null,
+        		lesson_type:null,
+        		lesson_name:null,
+        		status:null
+        	},
+        	3:{
+        		lesson_id:null,
+        		lesson_type:null,
+        		lesson_name:null,
+        		status:null
+        	}
+        },
+        right_type_num:null,
+        type_num:null
       }
     },
 
     components: {},
 
     mounted () {
-      this.getUserInfo()
+      this.getUserInfo(),
+      this.getCourseInfo()
     },
 
     methods: {
@@ -61,6 +96,17 @@
           console.log(res)
         })
       },
+      getCourseInfo(res){
+      	this.api.v1.user.index({}).then(res => {
+      		this.english=res.data.schedule.english
+      		this.math=res.data.schedule.math
+      		this.logic=res.data.schedule.logic
+      		this.right_type_num=res.data.today.right_type_num
+      		this.type_num=res.data.today.type_num
+      		console.log(res)
+      	})
+      },
+      
       switchtostudy () {
         const url = '../learn/main'
         wx.navigateTo({ url })

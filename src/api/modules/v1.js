@@ -4,7 +4,8 @@ const v1 = {
   user: {
     login: data => request('v1/user/login', 'post', data),
     info: data => request('v1/user/info', 'post', data),
-    todaylesson:data => request('v1/lesson/pay-status', 'post', data)
+    todaylesson:data => request('v1/lesson/today', 'post', data),
+    index:data => request('v1/home/index', 'post', data)
   }
 }
 
