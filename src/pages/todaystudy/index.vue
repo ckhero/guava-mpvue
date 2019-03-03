@@ -1,7 +1,7 @@
 <template>
 <view class="page">
   <image class="userPhoto"  :src="img_url"  mode="widthFix" />
-  <i-button bind:click="toanswer" type="primary" long="true" size	="large" i-class="buttonAnswer">开始答题</i-button>
+  <i-button @click="toanswer" type="primary" long="true" size	="large" i-class="buttonAnswer">开始答题</i-button>
 、</view>
 
 </template>
