@@ -3,7 +3,7 @@
     <view class='top-left'>
       <img class='userPic' :src='head'/>
       <view class=''>
-      	
+
         <view class='item'>姓名：{{name}}</view>
         <view class='item'>累计打卡：{{sign_day}} | 积分：{{point}} | <a href="../ranking/main" target="_blank" style="text-decoration: underline">排名：{{rank}}</a>
         </view>
@@ -58,7 +58,6 @@
           this.rank = res.data.rank
           this.level = res.data.level
           this.sign_day = res.data.sign_day
-          console.log(res)
         })
       },
       switchtostudy () {

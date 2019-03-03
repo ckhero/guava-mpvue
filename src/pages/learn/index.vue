@@ -1,6 +1,6 @@
 <template>
 <view class='shape'>
-    
+
     <view class='learnlength'><text class=''>学习进度2/60</text></view>
     <view class='top-left'><view style="margin-left: 20rpx;">学习列表:</view><view class='item'><a href="../ranking/main" target="_blank" class="allclass">全部课程 ></a></view></view>
     <view class='border'><view>第{{num1}}天</view>
@@ -18,10 +18,10 @@
     	      <view class='row'><view>数学：</view><view>{{english1}}</view><view class='finish'>{{status}}</view></view>
     	      <view class='row'><view>逻辑：</view><view>{{english1}}</view><view class='finish'>{{status}}</view></view>
     </view>
-    
+
     <button  @click="toanswer" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 80rpx;color: #ffffff;font-size: 40rpx;" >开始答题</button>
   </view>
-  
+
 </template>
 
 <script>
@@ -43,7 +43,7 @@
     components: {},
 
     mounted () {
-      
+
     },
 
     methods: {
@@ -53,17 +53,17 @@
           console.log(res)
         })
       },
-	      
+
      toanswer(){
-     	const url="../todaystudy/main"
+     	const url="../todaystudy/main?id=11"
       	wx.navigateTo({url})
      }
-    
-      },
-    
-    
 
-    
+      },
+
+
+
+
 
     created () {
       // let app = getApp()
@@ -91,7 +91,7 @@ margin-left: 380rpx;
 .border{
 margin-left:20rpx;
 	border-bottom: 1rpx solid #efefef;
-}   
+}
 .row{display: flex;
   border-bottom: 1rpx solid #efefef;
     margin-left: 40rpx;
