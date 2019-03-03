@@ -1,7 +1,7 @@
 <template>
 <view class="page">
   <image class="userPhoto"  :src="img_url"  mode="widthFix" />
-  <i-button bind:click="toanswer" type="primary" long="true" size	="large" i-class="buttonAnswer">开始答题</i-button>
+  <i-button @click="toanswer" type="primary" long="true" size	="large" i-class="buttonAnswer">开始答题</i-button>
 、</view>
 
 </template>
@@ -15,11 +15,12 @@ export default {
     }
   },
   onLoad (options) {
+    this.lesson_id = options['id']
     this.getLessonDetail(options['id'])
   },
   methods: {
     toanswer () {
-      const url = '../answer/main'
+      const url = '../answer/main?id=' + this.lesson_id
       wx.navigateTo({ url })
     },
     getLessonDetail (id) {
