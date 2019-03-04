@@ -2,25 +2,25 @@
 <view class='shape'>
     
   
-
-     <view class='progress_box'>
+     
+     <div class='progress_box'>
         <canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas> 
         <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas> 
         <view class="progress_text">
             <!--<view class="progress_dot"></view> -->
-            <text class='progress_info'> {{done/total*100}}%</text>
+            <text class='progress_info'> {{perNum}}%</text>
         </view>     
-    </view>
-
+    </div>
+    
 
 
     <!--<view class='learnlength'><text class=''>进度 \n 2/60</text></view>-->
     <view class='top-left'><view style="margin-left: 20rpx;">学习列表:</view><view class='item'><a href="../ranking/main" target="_blank" class="allclass">全部课程 ></a></view></view>
 <div v-for="(studyPlan, index) in todayData" :key="index" >
 	<view class='item' style="margin-left: 20rpx;" >第{{ studyPlan.day }}天</view>
-	<view  style="display: flex;margin-left: 30rpx;" v-for="(lessonInfo, index1) in studyPlan.lessons" :key="index1">
+	<view  class="border" style="display: flex;margin-left: 30rpx;" v-for="(lessonInfo, index1) in studyPlan.lessons" :key="index1">
 		{{lessonInfo.lesson_type}}:&nbsp;&nbsp;&nbsp;&nbsp;{{lessonInfo.lesson_name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="../todaystudy/main?id=11" style="color: #0000FF;">{{lessonInfo.status}}</a>
+		<button @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style="color: #0000FF;">{{lessonInfo.status}}</button>
 	</view>
 	
 	
@@ -47,6 +47,7 @@
   import global_ from '@/components/global'
   import request from '@/utils/request'
   var per=1
+  //var perNum=1
 
   export default {
 	data(){
@@ -62,6 +63,7 @@
 //  		],
     		done: null,
     		total:60,
+    		perNum:null
     		
 //      countTimer: null
     		
@@ -92,6 +94,9 @@
         this.api.v1.user.info({}).then(res => {
           this.done = res.data.sign_day
           per=res.data.sign_day*2/this.total
+          
+          this.perNum=Math.floor(100*this.done/this.total)
+          
 //        this.setData({
 //        	per:res.data.sign_day*2/this.total
 //        })
@@ -102,9 +107,17 @@
       },
      
 
-     toanswer(){
-     	const url="../todaystudy/main?id=11"
-      	wx.navigateTo({url})
+     toanswer(lesson_id,status){
+     	const url="../todaystudy/main?id="+lesson_id
+     	if(status=="init")
+      	{
+      		wx.navigateTo({url})
+      	}
+      	else
+      	{
+      		
+      	}
+      	
      },
      drawProgressbg(){
     // 使用 wx.createContext 获取绘图上下文 context
@@ -118,6 +131,7 @@
     ctx.stroke();//对当前路径进行描边
     ctx.draw();
   },
+  
 // onReady() {
 //  this.drawProgressbg(); 
 //},
@@ -175,12 +189,14 @@
 </script>
 
 <style>
-
+.item{
+	font-weight:bold;
+}
 .progress_box{
   position: relative;
   margin-left: 280rpx;
-  width:110px;
-  height: 110px;  
+  width:250rpx;
+  height: 250rpx;  
 
   display: flex;  
   align-items: center;
@@ -189,18 +205,17 @@
 }
 .progress_bg{
   position: absolute;
-    width:110px;
-  height: 110px; 
+    width:250rpx;
+  height: 250rpx; 
 }
 .progress_canvas{ 
-  width:110px;
-  height: 110px; 
+  width:250rpx;
+  height: 250rpx; 
 } 
 .progress_text{ 
-  position: absolute; 
+position: absolute; 
   display: flex;  
-  align-items: center;
-  justify-content: center
+  text-align: center;
 }
 .progress_info{   
   font-size: 36rpx;

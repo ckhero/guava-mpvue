@@ -14,6 +14,7 @@
   import card from '@/components/card'
   import global_ from '@/components/global'
   import request from '@/utils/request'
+  import {setToken, getToken} from '@/utils/token'
   export default {
     data () {
       return {}
@@ -33,6 +34,7 @@
       },
       getSetting () {
         const url = '../homepage/main'
+        let self = this
         wx.getSetting({
           success: function (res) {
             if (res.authSetting['scope.userInfo']) {
@@ -44,24 +46,27 @@
                   // 用户已经授权过
                   wx.navigateTo({url})
                   console.log('用户已经授权过')
-                  wx.login({
-                    success (res) {
-                      if (res.code) {
-                        request.post({
-                          url: request.loginUrl,
-                          data: {
+                  if (getToken() === '') {
+                    wx.login({
+                      success (res) {
+                        if (res.code) {
+                          self.api.v1.user.login({
                             'code': res.code,
                             'iv': iv,
                             'encrypt_data': encryptData
-                          }
-                        }).then(res => {
-                          global_.xToken = res.data.token
-                        })
-                      } else {
-                        console.log('登录失败！' + res.errMsg)
+                          }).then(res => {
+                            setToken(res.data.token)
+                            wx.navigateTo({ url })
+                          })
+                        } else {
+                          console.log('登录失败！' + res.errMsg)
+                        }
                       }
-                    }
-                  })
+                    })
+                  } else {
+                    wx.navigateTo({ url })
+                    return true
+                  }
                 }
               })
             } else {

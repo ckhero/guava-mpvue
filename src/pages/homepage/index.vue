@@ -17,7 +17,7 @@
       <view class='item'><a href="../learn/main" target="_blank" class="allclass">全部课程 ></a></view>
     </view>
     <view class='row'>
-      <view class='study'><text >英语 \n {{english.done}}/{{english.total}}</text></view>
+      <view class='study'><text style="">英语 \n {{english.done}}/{{english.total}}</text></view>
       <view class='study'><text>数学 \n {{math.done}}/{{math.total}}</text></view>
       <view class='study'><text>逻辑 \n {{logic.done}}/{{logic.total}}</text></view>
     </view>
@@ -25,16 +25,18 @@
             style="border:10rpx;width: 250rpx;height: 250rpx;background-color: #5CACEE;border-radius: 125rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 80rpx;color: #ffffff;font-size: 40rpx;text-align: center;">
       今日学习 \n {{right_type_num}}/{{type_num}}-->
        <view class='progress_box' @click="switchtostudy">
-        <canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas> 
-        <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas> 
+        <canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas>
+        <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas>
         <view class="progress_text">
-            <!--<view class="progress_dot"></view>--> 
-            <text class='progress_info'>完成 \n {{right_type_num}}/{{type_num}}</text>
-        </view>     
+            <!--<view class="progress_dot"></view>-->
+            <text style="font-weight:bold; ">
+            	  {{right_type_num}}/{{type_num}}
+            </text>
+        </view>
     </view>
      <view  class='txt'><text style="border-bottom: 2rpx solid #919191;">联系客服</text></view>
   </div>
-  
+
 
 </template>
 
@@ -60,7 +62,7 @@
         	done:null,
         	total:null
         },
-        
+
         right_type_num:null,
         type_num:null
       }
@@ -96,9 +98,9 @@
       		console.log(res)
       	})
       },
-      
+
       switchtostudy () {
-        const url = '../examination/main?id=11'
+        const url = '../ansresult/main?id=11'
         wx.navigateTo({ url })
       },
       drawProgressbg(){
@@ -108,30 +110,30 @@
     ctx.setStrokeStyle('#c0c0c0'); // 设置圆环的颜色
     ctx.setLineCap('round') // 设置圆环端点的形状
     ctx.beginPath();//开始一个新的路径
-    ctx.arc(102.5, 102.5, 75, 0, 2 * Math.PI, false);
+    ctx.arc(55, 55, 50, 0, 2 * Math.PI, false);
     //设置一个原点(100,100)，半径为90的圆的路径到当前路径
     ctx.stroke();//对当前路径进行描边
     ctx.draw();
   },
 // onReady() {
-//  this.drawProgressbg(); 
+//  this.drawProgressbg();
 //},
-  drawCircle(step){  
+  drawCircle(step){
     var context = wx.createCanvasContext('canvasProgress');
       // 设置渐变
-      var gradient = context.createLinearGradient(150, 75, 75, 150);
+      var gradient = context.createLinearGradient(100, 50, 50, 100);
       gradient.addColorStop("0", "#2661DD");
       gradient.addColorStop("0.5", "#40ED94");
       gradient.addColorStop("1.0", "#5956CC");
-      
+
       context.setLineWidth(10);
       context.setStrokeStyle(gradient);
       context.setLineCap('round')
-      context.beginPath(); 
+      context.beginPath();
       // 参数step 为绘制的圆环周长，从0到2为一周 。 -Math.PI / 2 将起始角设在12点钟位置 ，结束角 通过改变 step 的值确定
-      context.arc(102.5, 102.5, 75, -Math.PI / 2, step * Math.PI - Math.PI / 2, false);
-      context.stroke(); 
-      context.draw() 
+      context.arc(55, 55, 50, -Math.PI / 2, step * Math.PI - Math.PI / 2, false);
+      context.stroke();
+      context.draw()
   }
     },
 
@@ -143,42 +145,42 @@
 
 <style>
 	.progress_box{
-  
-  
-  width:165px;
-  height: 165px;  
-  margin-left: 180rpx;
+
+
+  width:320rpx;
+  height: 320rpx;
+  margin-left: 250rpx;
   margin-top: 100rpx;
-  display: flex; 
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  
+
 }
 .progress_bg{
   position: absolute;
-    width:165px;
-  height: 165px; 
+    width:250rpx;
+  height: 250rpx;
 }
-.progress_canvas{ 
-  width:165px;
-  height: 165px; 
-} 
-.progress_text{ 
-  position: absolute; 
-    
+.progress_canvas{
+  width:250rpx;
+  height: 250rpx;
+}
+.progress_text{
+  position:absolute ;
+
   align-items: center;
-  justify-content: center
+   
 }
-.progress_info{   
+.progress_info{
   font-size: 36rpx;
   text-align: center;
   padding-left: 14rpx;
   letter-spacing: 2rpx
-} 
+}
 .progress_dot{
   width:16rpx;
-  height: 16rpx;  
+  height: 16rpx;
   border-radius: 50%;
   background-color: #fb9126;
 }
@@ -197,9 +199,9 @@
     .txt{
     	margin-top: 100rpx;
     	margin-left: 300rpx;
-    
-    
-    	
+
+
+
     }
     .item{
 
@@ -220,7 +222,7 @@
 	margin-right: 20rpx;
 	margin-top: 50rpx;
 	margin-bottom: 50rpx;
-  background-color: #ff5757;
+  background-color: #FFE4B5;
   border-radius: 15rpx;
 }
 .picker{
@@ -235,11 +237,13 @@
   margin-top: 30rpx;
 }
  .study{
+ 	
  	width: 300rpx;
  	height: 150rpx;
  	margin-left: 20rpx;
  	margin-top: 40rpx;
-  background-color: #ff9800;
+ 	font-weight:bold;
+  background-color: #1E90FF;
   border-radius: 15rpx;
   text-align:center;
 }
