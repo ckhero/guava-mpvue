@@ -41,6 +41,7 @@
                           wx.navigateTo({ url })
                         })
                       } else {
+                      	
                         console.log('登录失败！' + res.errMsg)
                       }
                     }
@@ -48,9 +49,10 @@
                 }
               })
             } else {
-              const url = '../index/main'
+            	//console.log(url)
+            	const url="../index/main"
               wx.navigateTo({ url })
-              console.log('用户还未授权过')
+             // console.log(this.url)
 
             }
           }
