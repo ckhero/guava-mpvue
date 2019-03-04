@@ -32,7 +32,17 @@
             <text class='progress_info'>完成 \n {{right_type_num}}/{{type_num}}</text>
         </view>
     </view>
-     <view  class='txt'><text style="border-bottom: 2rpx solid #919191;">联系客服</text></view>
+     <view  class='txt'><text style="border-bottom: 2rpx solid #919191;" @click="showContact">联系客服</text></view>
+    <div class="mask" v-if="contact" @click="hideContact">
+      <img src="../../../static/images/ck.jpeg" alt="" class="mask-img"/>
+    </div>
+    <!--<i-modal :visible="contact">-->
+      <!--<view>-->
+        <!--<image src="../../static/images/ck.jpeg"></image>-->
+      <!--</view>-->
+    <!--</i-modal>-->
+
+    <!--<i-message id="message" />-->
   </div>
 
 
@@ -42,6 +52,7 @@
   export default {
     data () {
       return {
+        contact: false,
         name: null,
         head: null,
         sign_day: null,
@@ -69,10 +80,14 @@
     components: {},
 
     mounted () {
-      this.getUserInfo(),
-      this.getCourseInfo(),
-      this.drawProgressbg(),
-		this.drawCircle(1.5)
+      this.getUserInfo()
+      this.getCourseInfo()
+      this.drawProgressbg()
+		  this.drawCircle(1.5)
+      this.store.commit('increment')
+      this.store.commit('increment')
+      this.store.commit('increment')
+      console.log(this.store.state.count)
     },
 
     methods: {
@@ -132,7 +147,13 @@
       context.arc(102.5, 102.5, 75, -Math.PI / 2, step * Math.PI - Math.PI / 2, false);
       context.stroke();
       context.draw()
-  }
+  },
+      showContact () {
+        this.contact = true
+      },
+      hideContact () {
+        this.contact = false
+      }
     },
 
     created () {
@@ -142,9 +163,8 @@
 </script>
 
 <style>
-	.progress_box{
 
-
+  .progress_box{
   width:165px;
   height: 165px;
   margin-left: 180rpx;
@@ -152,7 +172,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
 
 }
 .progress_bg{
@@ -182,30 +201,25 @@
   border-radius: 50%;
   background-color: #fb9126;
 }
-  .row {
-    display: flex;
-    width: 600 rpx;
-    margin-left: auto;
-    margin-right: auto;
-  }
-	.userPic{
-
-    width: 120rpx;
-    height: 120rpx;
-    margin: 10rpx 20rpx 10rpx 15rpx;
-  }
-    .txt{
-    	margin-top: 100rpx;
-    	margin-left: 300rpx;
-
-
-
-    }
-    .item{
-
-
-    margin: 0rpx 15rpx 0rpx 15rpx;
-  font-size: 32rpx;}
+.row {
+  display: flex;
+  width: 600rpx;
+  margin-left: auto;
+  margin-right: auto;
+}
+.userPic{
+  width: 120rpx;
+  height: 120rpx;
+  margin: 10rpx 20rpx 10rpx 15rpx;
+}
+.txt{
+  margin-top: 100rpx;
+  margin-left: 300rpx;
+}
+.item{
+  margin: 0rpx 15rpx 0rpx 15rpx;
+  font-size: 32rpx;
+}
 
 .score{
   text-align: left;
@@ -251,4 +265,24 @@
 
 margin-left: 380rpx;
 }
+  .mask {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,.7);
+    z-index:1000;
+    transition:all .2s ease-in-out;
+    opacity:1;
+  }
+  .mask-img {
+    border-radius:14rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    max-width: 50%;
+    border: 0;
+    transform: translate(-50%, -50%);
+  }
 </style>

@@ -6,6 +6,7 @@ export default
 {
   xToken: null,
   getRandColor,
-  homePageUrl: '../homepage/main'
+  homePageUrl: '../homepage/main',
+  loadingPageUrl: '../loading/main'
 }
 </script>

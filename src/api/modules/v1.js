@@ -11,7 +11,11 @@ const v1 = {
     todaylesson: data => request('v1/lesson/today', 'post', data)
   },
   examination: {
-    submit: data => request('v1/examination/save', 'post', data)
+    submit: data => request('v1/examination/save', 'post', data),
+    result: data => request('v1/examination/result', 'post', data)
+  },
+  rank: {
+    list: data => request('v1/rank/list', 'post', data)
   }
 }
 

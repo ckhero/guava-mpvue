@@ -1,4 +1,4 @@
-import {getToken} from '@/utils/token'
+import {getToken, delToken} from '@/utils/token'
 // import {fail} from '@/pages/toast'
 
 const host = 'https://guava.51qwer.com/'
@@ -17,6 +17,9 @@ function request (url, method = 'post', data = {}, header = {}) {
         'x-token': getToken()
       },
       success: function (res) {
+        if (res.data.code === 101003) {
+          delToken()
+        }
         if (res.data.code !== 0) {
           wx.showToast({
             title: res.data.message,

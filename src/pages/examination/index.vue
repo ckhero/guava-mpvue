@@ -9,16 +9,26 @@
       <i-col span="24" i-class="col-class spanMain">
         <view  :wx:if="question.lesson_question_type === 'img'"><image class="userPhoto"  :src="question.lesson_question_detail"  mode="widthFix" /></view>
         <view wx:else><text class="textMain">{{ question.lesson_question_detail}}</text></view>
-
       </i-col>
       <i-col span="24" i-class="col-class"><text class="title" style="margin-top:40rpx">  选项</text></i-col>
       <div v-for="(option, index) in question.options" :key="index">
-        <i-col span="24" i-class="col-class option {option.check ? 'check' : ''}" @click="choseOption(option.lesson_question_item_option)">
+        <view  :wx:if="option.check == true">
+          <i-col span="24" i-class="col-class option check" @click="choseOption(option.lesson_question_item_option)">
+            <i-col span="3" i-class="col-class spanMain2"><text class="textMain">{{option.lesson_question_item_option}}. </text></i-col>
+            <i-col span="20" i-class="col-class"><text class="textMain" style="margin-right: 30rpx">  {{option.lesson_question_item_detail}}</text></i-col>
+          </i-col>
+        </view><view wx:else>
+        <i-col span="24" i-class="col-class option" @click="choseOption(option.lesson_question_item_option)">
           <i-col span="3" i-class="col-class spanMain2"><text class="textMain">{{option.lesson_question_item_option}}. </text></i-col>
           <i-col span="20" i-class="col-class"><text class="textMain" style="margin-right: 30rpx">  {{option.lesson_question_item_detail}}</text></i-col>
         </i-col>
+      </view>
       </div>
      </i-row>
+    <i-row i-class="preBotton">
+      <i-col offset="4" span="6" i-class="col-class"><i-button @click="preQuestion" type="primary">上一题</i-button></i-col>
+      <i-col offset="4" span="6" i-class="col-class"><i-button @click="nextQuestion" type="primary">下一题</i-button></i-col>
+    </i-row>
     <i-modal title="交卷确认" :visible="submitConfirm" @ok="submit()" @cancel="cancel()">
       <view>提交后无法撤销～！～</view>
     </i-modal>
@@ -38,10 +48,13 @@
         answer: {
           id: '',
           options: []
-        }
+        },
+        test: null
       }
     },
     onLoad (options) {
+      this.question = []
+      this.submitConfirm = false
       this.getLessonDetail(options['id'])
       this.lesson_id = options['id']
     },
@@ -51,7 +64,16 @@
     mounted () {
       this.currQuestionNum = 1
     },
-
+    computed: {
+      question (val) {
+        return this.questions[this.currQuestionNum]
+      }
+    },
+    watch: {
+      currQuestionNum (val) {
+        this.question = this.questions[val]
+      }
+    },
     methods: {
       getLessonDetail (id) {
         this.api.v1.lesson.detail({
@@ -60,28 +82,23 @@
           this.answer.id = res.data.lesson_id
           this.questions = res.data.questions
           this.question = this.questions[this.currQuestionNum]
+          this.options = this.questions[this.currQuestionNum].options
           this.total = Object.keys(this.questions).length
           this.answer.id = id
         })
       },
       choseOption (optionId) {
-        this.options = []
         this.answer.options[this.question.lesson_question_id] = {lesson_question_id: this.question.lesson_question_id, option: optionId}
         Object.keys(this.questions[this.currQuestionNum].options).forEach((item, index) => {
           this.questions[this.currQuestionNum]['options'][item]['check'] = item === optionId
-          this.question['options'][item]['check'] = item === optionId
         })
-        this.question = []
-        this.question = this.questions[this.currQuestionNum]
-        console.log(this.question.options)
+        this.$set(this.questions[this.currQuestionNum], 'options', this.questions[this.currQuestionNum]['options'])
         if (this.currQuestionNum < this.total) {
           this.currQuestionNum += 1
-          this.question = this.questions[this.currQuestionNum]
         } else {
+          this.currQuestionNum = this.currQuestionNum
           this.preSubmit()
         }
-
-        // console.log(this.questions[this.currQuestionNum])
       },
       submit () {
         this.api.v1.examination.submit(this.answer).then((res) => {
@@ -94,12 +111,26 @@
       },
       preSubmit () {
         this.submitConfirm = true
-      }
-    },
-    watch: {
-      question (val) {
-        console.log(1)
-        this.question = val
+      },
+      preQuestion () {
+        if (this.currQuestionNum > 1) {
+          this.currQuestionNum -= 1
+        } else {
+          wx.showToast({
+            title: '已经是第一题',
+            icon: 'none'
+          })
+        }
+      },
+      nextQuestion () {
+        if (this.currQuestionNum < this.total) {
+          this.currQuestionNum += 1
+        } else {
+          wx.showToast({
+            title: '已经是最后一题',
+            icon: 'none'
+          })
+        }
       }
     },
     created () {
@@ -109,6 +140,9 @@
 </script>
 
 <style>
+  .preBotton {
+    margin-top: 100rpx;
+  }
   .title {
     color: #595757;
     font-size: 30rpx;
