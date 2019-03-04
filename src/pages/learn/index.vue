@@ -15,7 +15,7 @@
 
 
     <!--<view class='learnlength'><text class=''>进度 \n 2/60</text></view>-->
-    <view class='top-left'><view style="margin-left: 20rpx;">学习列表:</view><view class='item'><a href="../ranking/main" target="_blank" class="allclass">全部课程 ></a></view></view>
+    <view class='top-left'><view style="margin-left: 20rpx;font-weight:bold;">学习列表:</view><view class='item'><a href="../ranking/main" target="_blank" class="allclass">全部课程 ></a></view></view>
 <div v-for="(studyPlan, index) in todayData" :key="index" >
 	<view class='item' style="margin-left: 20rpx;" >第{{ studyPlan.day }}天</view>
 	<view  class="border" style="display: flex;margin-left: 30rpx;" v-for="(lessonInfo, index1) in studyPlan.lessons" :key="index1">

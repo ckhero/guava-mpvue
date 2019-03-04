@@ -34,7 +34,21 @@
             </text>
         </view>
     </view>
-     <view  class='txt'><text style="border-bottom: 2rpx solid #919191;">联系客服</text></view>
+     
+     <view class='container'>
+
+		  <view class='txt' style="border-bottom: 2rpx solid #919191;" @click='buttonTap' type='primary'>联系客服</view>
+		
+		  <modal title="客服二维码" :hidden="modalHidden" @click="modalConfirm" >
+		    <view>
+		      <img class="image" src="/static/images/user.png" mode='aspectFill'/>
+		    </view>
+		    
+		    <view>扫描上方二维码添加微信</view>
+		    
+		  </modal>
+
+</view>
   </div>
 
 
@@ -44,6 +58,7 @@
   export default {
     data () {
       return {
+      	modalHidden: true,
         name: null,
         head: null,
         sign_day: null,
@@ -134,7 +149,29 @@
       context.arc(55, 55, 50, -Math.PI / 2, step * Math.PI - Math.PI / 2, false);
       context.stroke();
       context.draw()
-  }
+  },
+  buttonTap() {
+    this.modalHidden=false
+  },
+
+  /**
+   * 点击取消
+   */
+  modalCandel() {
+    // do something
+    this.modalHidden=true
+    
+  },
+
+  /**
+   *  点击确认
+   */
+  modalConfirm() {
+    // do something
+    this.modalHidden=true
+    }
+  
+
     },
 
     created () {
@@ -197,8 +234,8 @@
     margin: 10rpx 20rpx 10rpx 15rpx;
   }
     .txt{
-    	margin-top: 100rpx;
-    	margin-left: 300rpx;
+    	margin-top: 0;
+    	margin-left: 0;
 
 
 
@@ -255,4 +292,5 @@
 
 margin-left: 380rpx;
 }
+
 </style>
