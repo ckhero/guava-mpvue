@@ -34,18 +34,22 @@
             </text>
         </view>
     </view>
-     
+
+     <view  class='txt'><text style="border-bottom: 2rpx solid #919191;" @click="showContact">联系客服</text></view>
+    <div class="mask" v-if="contact" @click="hideContact">
+      <img src="../../../static/images/ck.jpeg" alt="" class="mask-img"/>
+    </div>
+
      <view class='container'>
 
 		  <view class='txt' style="border-bottom: 2rpx solid #919191;" @click='buttonTap' type='primary'>联系客服</view>
-		
 		  <modal title="客服二维码" :hidden="modalHidden" @click="modalConfirm" >
 		    <view>
 		      <img class="image" src="/static/images/contact.png" mode='aspectFill'/>
 		    </view>
-		    
+
 		    <view>扫描上方二维码添加微信</view>
-		    
+
 		  </modal>
 
 </view>
@@ -58,6 +62,7 @@
   export default {
     data () {
       return {
+        contact: false,
       	modalHidden: true,
         name: null,
         head: null,
@@ -86,10 +91,14 @@
     components: {},
 
     mounted () {
-      this.getUserInfo(),
-      this.getCourseInfo(),
-      this.drawProgressbg(),
-		this.drawCircle(1.5)
+      this.getUserInfo()
+      this.getCourseInfo()
+      this.drawProgressbg()
+		  this.drawCircle(1.5)
+      this.store.commit('increment')
+      this.store.commit('increment')
+      this.store.commit('increment')
+      console.log(this.store.state.count)
     },
 
     methods: {
@@ -150,6 +159,12 @@
       context.stroke();
       context.draw()
   },
+      showContact () {
+        this.contact = true
+      },
+      hideContact () {
+        this.contact = false
+      },
   buttonTap() {
     this.modalHidden=false
   },
@@ -160,7 +175,7 @@
   modalCandel() {
     // do something
     this.modalHidden=true
-    
+
   },
 
   /**
@@ -170,8 +185,6 @@
     // do something
     this.modalHidden=true
     }
-  
-
     },
 
     created () {
@@ -181,9 +194,11 @@
 </script>
 
 <style>
-	.progress_box{
 
-
+  .progress_box{
+  width:165px;
+  height: 165px;
+  margin-left: 180rpx;
   width:320rpx;
   height: 320rpx;
   margin-left: 250rpx;
@@ -191,7 +206,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
 
 }
 .progress_bg{
@@ -207,7 +221,7 @@
   position:absolute ;
 
   align-items: center;
-   
+
 }
 .progress_info{
   font-size: 36rpx;
@@ -274,7 +288,7 @@
   margin-top: 30rpx;
 }
  .study{
- 	
+
  	width: 300rpx;
  	height: 150rpx;
  	margin-left: 20rpx;
@@ -292,5 +306,24 @@
 
 margin-left: 380rpx;
 }
-
+  .mask {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,.7);
+    z-index:1000;
+    transition:all .2s ease-in-out;
+    opacity:1;
+  }
+  .mask-img {
+    border-radius:14rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    max-width: 50%;
+    border: 0;
+    transform: translate(-50%, -50%);
+  }
 </style>
