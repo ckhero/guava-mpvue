@@ -3,8 +3,14 @@
     <view class='top-left'>
       <img class='userPic' :src='head'/>
       <view class=''>
-
-        <view class='item'>姓名：{{name}}</view>
+        <view class='item'>姓名：{{name}}
+		  <text style="margin-left: 280rpx;color: #B22222;" @click='buttonTap' type='primary'>规则</text></view>
+		  <modal title="答题挑战规则说明" :hidden="modalHidden" @click="modalConfirm" showCancel="true" >
+		    <view>
+		      <img class="image" src="/static/images/learn.png" mode='aspectFill'/>
+		    </view>		    
+		  </modal>
+        
         <view class='item'>累计打卡：{{sign_day}} | 积分：{{point}} | <a href="../ranking/main" target="_blank" style="text-decoration: underline">排名：{{rank}}</a>
         </view>
       </view>
@@ -40,7 +46,7 @@
       <img src="../../../static/images/ck.jpeg" alt="" class="mask-img"/>
     </div>
 
-     <view class='container'>
+     <!--<view class='container'>
 
 		  <view class='txt' style="border-bottom: 2rpx solid #919191;" @click='buttonTap' type='primary'>联系客服</view>
 		  <modal title="客服二维码" :hidden="modalHidden" @click="modalConfirm" >
@@ -52,7 +58,7 @@
 
 		  </modal>
 
-</view>
+</view>-->
   </div>
 
 
@@ -198,10 +204,10 @@
   .progress_box{
   width:165px;
   height: 165px;
-  margin-left: 180rpx;
+  
   width:320rpx;
   height: 320rpx;
-  margin-left: 250rpx;
+  margin-left: 235rpx;
   margin-top: 100rpx;
   display: flex;
   align-items: center;
@@ -249,7 +255,7 @@
   }
     .txt{
     	margin-top: 0;
-    	margin-left: 0;
+    	margin-left: 310rpx;
 
 
 
@@ -288,15 +294,14 @@
   margin-top: 30rpx;
 }
  .study{
-
  	width: 300rpx;
  	height: 150rpx;
  	margin-left: 20rpx;
  	margin-top: 40rpx;
  	font-weight:bold;
-  background-color: #1E90FF;
-  border-radius: 15rpx;
-  text-align:center;
+    background-color:#1E90FF;
+	border-radius: 15rpx;
+	text-align:center;
 }
 .top-left{
 	display: flex;
@@ -326,4 +331,11 @@ margin-left: 380rpx;
     border: 0;
     transform: translate(-50%, -50%);
   }
+  .image {
+width: 600rpx;
+height: 1000rpx;
+margin: 10rpx 20rpx 0rpx 0rpx;
+float: left;
+}
+
 </style>

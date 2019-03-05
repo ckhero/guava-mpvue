@@ -1,8 +1,7 @@
 <template>
   <div>
     <i-row>
-      <i-col offset="2" span="20">
-        <i-row i-class="row-style">
+
           <i-col offset="8" span="8" i-class="col-class text-center">
             <i-avatar :src="head ? head : 'https://i.loli.net/2017/08/21/599a521472424.jpg'" size="large"></i-avatar>
           </i-col>
@@ -12,8 +11,7 @@
           <i-col span="24" i-class="col-class text text-center text-light-title">
             排名: 第 {{rank}} 名
           </i-col>
-        </i-row>
-      </i-col>
+
     </i-row>
     <div v-for="(item, index) in rankList" :key="index">
       <i-row>
