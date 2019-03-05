@@ -41,7 +41,7 @@
 		
 		  <modal title="客服二维码" :hidden="modalHidden" @click="modalConfirm" >
 		    <view>
-		      <img class="image" src="/static/images/user.png" mode='aspectFill'/>
+		      <img class="image" src="/static/images/contact.png" mode='aspectFill'/>
 		    </view>
 		    
 		    <view>扫描上方二维码添加微信</view>
