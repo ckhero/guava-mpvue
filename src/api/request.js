@@ -19,6 +19,7 @@ function request (url, method = 'post', data = {}, header = {}) {
       success: function (res) {
         if (res.data.code === 101003) {
           delToken()
+          reject(res.data.message)
         }
         if (res.data.code !== 0) {
           wx.showToast({

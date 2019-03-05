@@ -1,7 +1,21 @@
-import global from '@/components/global'
+// import global from '@/components/global'
+import {doLogin} from '@/utils/login'
 
-function setToken (token) {
-  wx.setStorageSync('token', token)
+function setToken (token, url) {
+  wx.setStorage({
+    key: 'token',
+    data: token,
+    success: () => {
+      wx.navigateTo({ url: url })
+    },
+    fail: (error) => {
+      console.log(error)
+      wx.showToast({
+        title: 'token设置失败',
+        icon: 'none'
+      })
+    }
+  })
 }
 
 function getToken () {
@@ -10,8 +24,7 @@ function getToken () {
 
 function delToken () {
   wx.removeStorageSync('token')
-  const url = global.loadingPageUrl
-  wx.navigateTo({url})
+  doLogin()
 }
 export {
   setToken,

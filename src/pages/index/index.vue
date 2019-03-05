@@ -11,70 +11,16 @@
 </template>
 
 <script>
-  import card from '@/components/card'
-  import global_ from '@/components/global'
-  import request from '@/utils/request'
-  import {setToken, getToken} from '@/utils/token'
+  import {doLogin} from '@/utils/login'
+
   export default {
     data () {
       return {}
     },
     components: {},
     mounted () {
-      // this.getSetting()
     },
     methods: {
-      bindViewTap () {
-        const url = '../logs/main'
-        if (mpvuePlatform === 'wx') {
-          mpvue.switchTab({ url })
-        } else {
-          mpvue.navigateTo({ url })
-        }
-      },
-      getSetting () {
-        const url = '../homepage/main'
-        let self = this
-        wx.getSetting({
-          success: function (res) {
-            if (res.authSetting['scope.userInfo']) {
-              wx.getUserInfo({
-                success: function (res) {
-                  var iv = res.iv
-                  var encryptData = res.encryptedData
-                  console.log(res)
-                  // 用户已经授权过
-                  wx.navigateTo({url})
-                  console.log('用户已经授权过')
-                  if (getToken() === '') {
-                    wx.login({
-                      success (res) {
-                        if (res.code) {
-                          self.api.v1.user.login({
-                            'code': res.code,
-                            'iv': iv,
-                            'encrypt_data': encryptData
-                          }).then(res => {
-                            setToken(res.data.token)
-                            wx.navigateTo({ url })
-                          })
-                        } else {
-                          console.log('登录失败！' + res.errMsg)
-                        }
-                      }
-                    })
-                  } else {
-                    wx.navigateTo({ url })
-                    return true
-                  }
-                }
-              })
-            } else {
-              console.log('用户还未授权过')
-            }
-          }
-        })
-      },
       getUserInfo1 () {
         console.log('click事件首先触发')
         // 判断小程序的API，回调，参数，组件等是否在当前版本可用。  为false 提醒用户升级微信版本
@@ -90,7 +36,7 @@
         if (e.mp.detail.rawData) {
           // 用户按了允许授权按钮
           console.log('用户按了允许授权按钮')
-          this.getSetting()
+          doLogin()
         } else {
           // 用户按了拒绝按钮
           console.log('用户按了拒绝按钮')
