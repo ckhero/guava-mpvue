@@ -1,51 +1,125 @@
 <template>
   <div>
-    <view class='top-left'>
-      <img class='userPic' :src='head'/>
-      <view class=''>
-        <view class='item'>姓名：{{name}}
-		  <text style="margin-left: 280rpx;color: #B22222;" @click='buttonTap' type='primary'>规则</text></view>
-		  <modal title="答题挑战规则说明" :hidden="modalHidden" @click="modalConfirm" showCancel="true" >
-		    <view>
-		      <img class="image" src="/static/images/learn.png" mode='aspectFill'/>
-		    </view>		    
-		  </modal>
-        
-        <view class='item'>累计打卡：{{sign_day}} | 积分：{{point}} | <a href="../ranking/main" target="_blank" style="text-decoration: underline">排名：{{rank}}</a>
-        </view>
-      </view>
+    <i-row i-class="content">
+      <i-col offset="1" span="22">
+        <i-row i-class="title-row-style">
+          <i-col span="4">
+            <i-avatar :src="head" size="large" shape="square" i-class="title-avtar" ></i-avatar>
+          </i-col>
+          <i-col offset="1" span="19">
+            <i-row i-class="title-text">
+              <i-col span="20">{{name}}</i-col>
+              <i-col span="4" @click='buttonTap'>
+                <i-icon type="prompt" i-class="title-text" size="24"color="#80848f"  />
+              </i-col>
+            </i-row>
+            <i-row i-class="title-text">
+              <i-col span="8">打卡：{{sign_day}}</i-col>
+              <i-col span="8">积分：{{point}}</i-col>
+              <i-col span="8" is-link="true">
+                <a href="../ranking/main" target="_blank" style="text-decoration: underline">排名：{{rank}}</a>
+              </i-col>
+            </i-row>
+          </i-col>
+        </i-row>
+        <i-row i-class="notice-bar">
+          <i-notice-bar icon="systemprompt">
+            点击获取最新的学习资料
+          </i-notice-bar>
+        </i-row>
+        <i-row>
+          <i-cell-group>
+            <i-cell title="挑战课程" is-link url="../learn/main" value="全部课程" i-class="middle-bar"></i-cell>
+          </i-cell-group>
+        </i-row>
+        <i-row>
+          <i-col span="7" i-class="lesson-info">
+            <i-col span="24">英语</i-col>
+            <i-col span="24">{{english.done}}/{{english.total}}</i-col>
+          </i-col>
+          <i-col offset="1" span="8" i-class="lesson-info">
+            <i-col span="24">数学</i-col>
+            <i-col span="24">{{math.done}}/{{math.total}}</i-col>
+          </i-col>
+          <i-col offset="1" span="7" i-class="lesson-info">
+            <i-col span="24">逻辑</i-col>
+            <i-col span="24">{{logic.done}}/{{logic.total}}</i-col>
+          </i-col>
+        </i-row>
+        <i-row i-class="today-processing">
+          <i-col span="12" offset="6" @click="switchtostudy">
+            <div class="circle circle-blue"></div>
+            <div class="circle circle-gray">
+              <i-col offset="3" span="18" i-class="circle-text circle-text-up">
+                今日课程
+              </i-col>
+              <i-col span="24" i-class="circle-text circle-text-down">
+                {{right_type_num}}/{{type_num}}
+              </i-col>
+            </div>
+          </i-col>
+        </i-row>
+        <i-row i-class="title-text contact-us">
+          <i-col span="24" @click="showContact">
+            联系客服
+          </i-col>
+        </i-row>
+      </i-col>
+    </i-row>
+    <!--<view class='top-left'>-->
+      <!--<img class='userPic' :src='head'/>-->
+      <!--<view class=''>-->
+        <!--<view class='item'>姓名：{{name}}-->
+		  <!--<text style="margin-left: 280rpx;color: #B22222;" @click='buttonTap' type='primary'>规则</text></view>-->
 
-    </view>
 
-    <view class='answer'>网址：{{}}</view>
-    <view class='top-left'>
-      <view style="margin-left: 20rpx;">挑战课程:</view>
-      <view class='item'><a href="../learn/main" target="_blank" class="allclass">全部课程 ></a></view>
-    </view>
-    <view class='row'>
-      <view class='study'><text style="">英语 \n {{english.done}}/{{english.total}}</text></view>
-      <view class='study'><text>数学 \n {{math.done}}/{{math.total}}</text></view>
-      <view class='study'><text>逻辑 \n {{logic.done}}/{{logic.total}}</text></view>
-    </view>
+        <!--<view class='item'>累计打卡：{{sign_day}} | 积分：{{point}} | <a href="../ranking/main" target="_blank" style="text-decoration: underline">排名：{{rank}}</a>-->
+        <!--</view>-->
+      <!--</view>-->
+
+    <!--</view>-->
+
+    <!--<view class='answer'>网址：{{}}</view>-->
+    <!--<view class='top-left'>-->
+      <!--<view style="margin-left: 20rpx;">挑战课程:</view>-->
+      <!--<view class='item'><a href="../learn/main" target="_blank" class="allclass">全部课程 ></a></view>-->
+    <!--</view>-->
+    <!--<view class='row'>-->
+      <!--<view class='study'><text style="">英语 \n {{english.done}}/{{english.total}}</text></view>-->
+      <!--<view class='study'><text>数学 \n {{math.done}}/{{math.total}}</text></view>-->
+      <!--<view class='study'><text>逻辑 \n {{logic.done}}/{{logic.total}}</text></view>-->
+    <!--</view>-->
     <!--<button plain="true" @click="switchtostudy"
             style="border:10rpx;width: 250rpx;height: 250rpx;background-color: #5CACEE;border-radius: 125rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 80rpx;color: #ffffff;font-size: 40rpx;text-align: center;">
       今日学习 \n {{right_type_num}}/{{type_num}}-->
-       <view class='progress_box' @click="switchtostudy">
-        <canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas>
-        <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas>
-        <view class="progress_text">
-            <!--<view class="progress_dot"></view>-->
-            <text style="font-weight:bold; ">
-            	  {{right_type_num}}/{{type_num}}
-            </text>
-        </view>
-    </view>
+       <!--<view class='progress_box' @click="switchtostudy">-->
+        <!--<canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas>-->
+        <!--<canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas>-->
+        <!--<view class="progress_text">-->
+            <!--&lt;!&ndash;<view class="progress_dot"></view>&ndash;&gt;-->
+            <!--<text style="font-weight:bold; ">-->
+            	  <!--{{right_type_num}}/{{type_num}}-->
+            <!--</text>-->
+        <!--</view>-->
+    <!--</view>-->
 
-     <view  class='txt'><text style="border-bottom: 2rpx solid #919191;" @click="showContact">联系客服</text></view>
+     <!--<view  class='txt'><text style="border-bottom: 2rpx solid #919191;" @click="showContact">联系客服</text></view>-->
     <div class="mask" v-if="contact" @click="hideContact">
       <img src="../../../static/images/ck.jpeg" alt="" class="mask-img"/>
     </div>
-
+    <template>
+      <radial-progress-bar :diameter="200"
+                           :completed-steps="completedSteps"
+                           :total-steps="totalSteps">
+        <p>Total steps: {{ totalSteps }}</p>
+        <p>Completed steps: {{ completedSteps }}</p>
+      </radial-progress-bar>
+    </template>
+    <modal title="答题挑战规则说明" :hidden="modalHidden" @click="modalConfirm" showCancel="true" >
+    <view>
+    <img class="image" src="/static/images/learn.png" mode='aspectFill'/>
+    </view>
+    </modal>
      <!--<view class='container'>
 
 		  <view class='txt' style="border-bottom: 2rpx solid #919191;" @click='buttonTap' type='primary'>联系客服</view>
@@ -130,7 +204,7 @@
       },
 
       switchtostudy () {
-        const url = '../ansresult/main?id=11'
+        const url = '../learn/main?id=11'
         wx.navigateTo({ url })
       },
       drawProgressbg(){
@@ -204,7 +278,7 @@
   .progress_box{
   width:165px;
   height: 165px;
-  
+
   width:320rpx;
   height: 320rpx;
   margin-left: 235rpx;
@@ -337,5 +411,78 @@ height: 1000rpx;
 margin: 10rpx 20rpx 0rpx 0rpx;
 float: left;
 }
-
+.title-text {
+  font-size: 30rpx;
+  height:60rpx;
+  line-height:60rpx;
+}
+  .title-avtar {
+    width:120rpx !important;
+    height:120rpx !important;
+    line-height:120rpx !important;
+  }
+  .content {
+    margin-top: 15rpx;
+  }
+  .title-row-style {
+    border-bottom:1rpx solid #dddee1;
+    padding: 30rpx 0rpx;
+  }
+  .notice-bar {
+    margin: 15rpx 0rpx;
+  }
+  .middle-bar {
+    padding:24rpx 0rpx !important;
+    border-bottom:1rpx solid #dddee1;
+  }
+  .lesson-info {
+    margin: 15rpx 0rpx;
+    background: linear-gradient(#5cadff, #2b85e4);
+    color: white;
+    height: 160rpx;
+    line-height: 50rpx;
+    border-radius: 12rpx;
+    padding: 30rpx 0rpx;
+    text-align: center;
+  }
+  .contact-us {
+    margin-top: 120rpx;
+    color:#80848f;
+    text-align: center;
+  }
+  .circle {
+    position: relative;
+    margin: 0 auto;
+    height: 260rpx;
+    width: 260rpx;
+    border-radius: 50%;
+    font-size: 30rpx;
+    color: #2b85e4;
+  }
+  .circle-gray {
+    position: relative;
+    background: #f8f8f9;
+    margin-top: -270rpx;
+  }
+  .today-processing {
+    margin-top: 100rpx;
+    text-align: center;
+  }
+  .circle-blue {
+    height: 280rpx;
+    width: 280rpx;
+    position: relative;
+    background: linear-gradient(#5cadff, #2b85e4);
+  }
+  .circle-text {
+    height: 50rpx;
+    line-height: 30rpx;
+  }
+  .circle-text-up {
+    margin-top: 88rpx;
+    border-bottom:2rpx solid #2b85e4;
+  }
+  .circle-text-down {
+    margin-top: 10rpx;
+  }
 </style>

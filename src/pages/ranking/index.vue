@@ -15,7 +15,7 @@
     </i-row>
     <div v-for="(item, index) in rankList" :key="index">
       <i-row>
-        <i-col offset="2" span="20">
+        <i-col offset="1" span="22">
           <i-row i-class="row-style">
             <i-col span="2" i-class="col-class text">
               {{index + 1}}
@@ -30,7 +30,7 @@
       </i-row>
     </div>
     <i-row>
-      <i-col offset="2" span="20">
+      <i-col offset="1" span="22">
         <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
       </i-col>
     </i-row>
