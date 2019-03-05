@@ -17,7 +17,7 @@
       <view class='item'><a href="../learn/main" target="_blank" class="allclass">全部课程 ></a></view>
     </view>
     <view class='row'>
-      <view class='study'><text >英语 \n {{english.done}}/{{english.total}}</text></view>
+      <view class='study'><text style="">英语 \n {{english.done}}/{{english.total}}</text></view>
       <view class='study'><text>数学 \n {{math.done}}/{{math.total}}</text></view>
       <view class='study'><text>逻辑 \n {{logic.done}}/{{logic.total}}</text></view>
     </view>
@@ -29,20 +29,30 @@
         <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas>
         <view class="progress_text">
             <!--<view class="progress_dot"></view>-->
-            <text class='progress_info'>完成 \n {{right_type_num}}/{{type_num}}</text>
+            <text style="font-weight:bold; ">
+            	  {{right_type_num}}/{{type_num}}
+            </text>
         </view>
     </view>
+
      <view  class='txt'><text style="border-bottom: 2rpx solid #919191;" @click="showContact">联系客服</text></view>
     <div class="mask" v-if="contact" @click="hideContact">
       <img src="../../../static/images/ck.jpeg" alt="" class="mask-img"/>
     </div>
-    <!--<i-modal :visible="contact">-->
-      <!--<view>-->
-        <!--<image src="../../static/images/ck.jpeg"></image>-->
-      <!--</view>-->
-    <!--</i-modal>-->
 
-    <!--<i-message id="message" />-->
+     <view class='container'>
+
+		  <view class='txt' style="border-bottom: 2rpx solid #919191;" @click='buttonTap' type='primary'>联系客服</view>
+		  <modal title="客服二维码" :hidden="modalHidden" @click="modalConfirm" >
+		    <view>
+		      <img class="image" src="/static/images/user.png" mode='aspectFill'/>
+		    </view>
+
+		    <view>扫描上方二维码添加微信</view>
+
+		  </modal>
+
+</view>
   </div>
 
 
@@ -53,6 +63,7 @@
     data () {
       return {
         contact: false,
+      	modalHidden: true,
         name: null,
         head: null,
         sign_day: null,
@@ -123,7 +134,7 @@
     ctx.setStrokeStyle('#c0c0c0'); // 设置圆环的颜色
     ctx.setLineCap('round') // 设置圆环端点的形状
     ctx.beginPath();//开始一个新的路径
-    ctx.arc(102.5, 102.5, 75, 0, 2 * Math.PI, false);
+    ctx.arc(55, 55, 50, 0, 2 * Math.PI, false);
     //设置一个原点(100,100)，半径为90的圆的路径到当前路径
     ctx.stroke();//对当前路径进行描边
     ctx.draw();
@@ -134,7 +145,7 @@
   drawCircle(step){
     var context = wx.createCanvasContext('canvasProgress');
       // 设置渐变
-      var gradient = context.createLinearGradient(150, 75, 75, 150);
+      var gradient = context.createLinearGradient(100, 50, 50, 100);
       gradient.addColorStop("0", "#2661DD");
       gradient.addColorStop("0.5", "#40ED94");
       gradient.addColorStop("1.0", "#5956CC");
@@ -144,7 +155,7 @@
       context.setLineCap('round')
       context.beginPath();
       // 参数step 为绘制的圆环周长，从0到2为一周 。 -Math.PI / 2 将起始角设在12点钟位置 ，结束角 通过改变 step 的值确定
-      context.arc(102.5, 102.5, 75, -Math.PI / 2, step * Math.PI - Math.PI / 2, false);
+      context.arc(55, 55, 50, -Math.PI / 2, step * Math.PI - Math.PI / 2, false);
       context.stroke();
       context.draw()
   },
@@ -153,7 +164,27 @@
       },
       hideContact () {
         this.contact = false
-      }
+      },
+  buttonTap() {
+    this.modalHidden=false
+  },
+
+  /**
+   * 点击取消
+   */
+  modalCandel() {
+    // do something
+    this.modalHidden=true
+
+  },
+
+  /**
+   *  点击确认
+   */
+  modalConfirm() {
+    // do something
+    this.modalHidden=true
+    }
     },
 
     created () {
@@ -168,6 +199,9 @@
   width:165px;
   height: 165px;
   margin-left: 180rpx;
+  width:320rpx;
+  height: 320rpx;
+  margin-left: 250rpx;
   margin-top: 100rpx;
   display: flex;
   align-items: center;
@@ -176,18 +210,18 @@
 }
 .progress_bg{
   position: absolute;
-    width:165px;
-  height: 165px;
+    width:250rpx;
+  height: 250rpx;
 }
 .progress_canvas{
-  width:165px;
-  height: 165px;
+  width:250rpx;
+  height: 250rpx;
 }
 .progress_text{
-  position: absolute;
+  position:absolute ;
 
   align-items: center;
-  justify-content: center
+
 }
 .progress_info{
   font-size: 36rpx;
@@ -201,25 +235,30 @@
   border-radius: 50%;
   background-color: #fb9126;
 }
-.row {
-  display: flex;
-  width: 600rpx;
-  margin-left: auto;
-  margin-right: auto;
-}
-.userPic{
-  width: 120rpx;
-  height: 120rpx;
-  margin: 10rpx 20rpx 10rpx 15rpx;
-}
-.txt{
-  margin-top: 100rpx;
-  margin-left: 300rpx;
-}
-.item{
-  margin: 0rpx 15rpx 0rpx 15rpx;
-  font-size: 32rpx;
-}
+  .row {
+    display: flex;
+    width: 600 rpx;
+    margin-left: auto;
+    margin-right: auto;
+  }
+	.userPic{
+
+    width: 120rpx;
+    height: 120rpx;
+    margin: 10rpx 20rpx 10rpx 15rpx;
+  }
+    .txt{
+    	margin-top: 0;
+    	margin-left: 0;
+
+
+
+    }
+    .item{
+
+
+    margin: 0rpx 15rpx 0rpx 15rpx;
+  font-size: 32rpx;}
 
 .score{
   text-align: left;
@@ -234,7 +273,7 @@
 	margin-right: 20rpx;
 	margin-top: 50rpx;
 	margin-bottom: 50rpx;
-  background-color: #ff5757;
+  background-color: #FFE4B5;
   border-radius: 15rpx;
 }
 .picker{
@@ -249,11 +288,13 @@
   margin-top: 30rpx;
 }
  .study{
+
  	width: 300rpx;
  	height: 150rpx;
  	margin-left: 20rpx;
  	margin-top: 40rpx;
-  background-color: #ff9800;
+ 	font-weight:bold;
+  background-color: #1E90FF;
   border-radius: 15rpx;
   text-align:center;
 }

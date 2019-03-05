@@ -46,12 +46,37 @@
                     wx.navigateTo({ url })
                     return true
                   }
+
+                  wx.login({
+                    success (res) {
+                      if (res.code) {
+                        self.api.v1.user.login({
+                          'code': res.code,
+                          'iv': iv,
+                          'encrypt_data': encryptData
+                        }).then(res => {
+                          setToken(res.data.token)
+                          wx.navigateTo({ url })
+                        })
+                      } else {
+                      	
+                        console.log('登录失败！' + res.errMsg)
+                      }
+                    }
+                  })
+
                 }
               })
             } else {
-              const url = '../index/main'
+            	//console.log(url)
+            	const url="../index/main"
               wx.navigateTo({ url })
+
+             // console.log(this.url)
+
+
               console.log('用户还未授权过')
+
             }
           }
         })
