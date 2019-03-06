@@ -29,7 +29,7 @@
         </i-row>
         <i-row>
           <i-cell-group>
-            <i-cell title="挑战课程" is-link url="../learn/main" value="全部课程" i-class="middle-bar"></i-cell>
+            <i-cell title="挑战课程" is-link url="../allclass/main" value="全部课程" i-class="middle-bar"></i-cell>
           </i-cell-group>
         </i-row>
         <i-row>

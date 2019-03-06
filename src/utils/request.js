@@ -6,6 +6,8 @@ const userInfoUrl = '/v1/user/info' // 登陆链接
 const rankListUrl='/v1/rank/list'
 const examUrl='/v1/examination/save'
 const todayLessonUrl='/v1/lesson/today'
+const lessonListUrl='/v1/lesson/list'
+
 
 // const userInfoUrl = '/v1/user/info' // 用户信息
 
@@ -62,5 +64,6 @@ export default {
   userInfoUrl,
   getUserInfo,
   todayLessonUrl,
-  rankListUrl
+  rankListUrl,
+  lessonListUrl
 }

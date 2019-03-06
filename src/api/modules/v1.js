@@ -8,7 +8,8 @@ const v1 = {
   },
   lesson: {
     detail: data => request('v1/lesson/detail', 'post', data),
-    todaylesson: data => request('v1/lesson/today', 'post', data)
+    todaylesson: data => request('v1/lesson/today', 'post', data),
+    list: data => request('v1/lesson/list', 'post', data)
   },
   examination: {
     submit: data => request('v1/examination/save', 'post', data),
