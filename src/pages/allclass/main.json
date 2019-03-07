@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "今日课程",
+  "navigationBarTitleText": "全部课程",
   "usingComponents": {
     "i-row": "../../../static/iview/row/index",
     "i-col": "../../../static/iview/col/index",
