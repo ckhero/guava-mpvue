@@ -68,7 +68,7 @@
 
      toanswer(lesson_id,status){
      	const url="../todaystudy/main?id="+lesson_id
-     	if(status=="init")
+        if(status=="init")
       	{
       		wx.navigateTo({url})
 

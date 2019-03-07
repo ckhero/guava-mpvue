@@ -13,8 +13,8 @@
       </i-col>
     </i-row>
     <i-row>
-      <i-col span="24" i-class="col-class text point-text-top">挑战成功</i-col>
-      <i-col span="24" i-class="col-class text">奖励已发放之您的账户，请稍后查收</i-col>
+      <i-col span="24" i-class="col-class text point-text-top">挑战{{status}}</i-col>
+      <!--<i-col span="24" i-class="col-class text">奖励已发放之您的账户，请稍后查收</i-col>-->
       <i-col span="24" i-class="col-class text">另外您将获得 {{point}} 积分奖励！</i-col>
     </i-row>
     <i-row>
@@ -39,6 +39,7 @@
       return {
         title: '答题成功',
         path: '/page/user?id=123'
+
       }
     },
     onUnload: function () {
@@ -51,7 +52,8 @@
     data () {
       return {
         percent: null,
-        point: null
+        point: null,
+        status:'成功'
       }
     },
     components: {},
@@ -64,6 +66,11 @@
         }).then((res) => {
           this.percent = res.data.user_lesson_right_percent
           this.point = res.data.user_lesson_point
+          if(res.data.user_lesson_right_percent<60)
+          {
+          
+          this.status='失败'
+          }
         })
       }
     },
@@ -111,6 +118,6 @@
     margin: 20rpx;
   }
   .share-button {
-    margin-top: 130rpx;
+    margin-top: 160rpx;
   }
 </style>
