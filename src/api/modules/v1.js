@@ -17,6 +17,9 @@ const v1 = {
   },
   rank: {
     list: data => request('v1/rank/list', 'post', data)
+  },
+  datum:{
+    list: data => request('v1/datum/list', 'post', data)
   }
 }
 

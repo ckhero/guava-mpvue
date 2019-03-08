@@ -1,0 +1,4 @@
+{
+  "enablePullDownRefresh": true, // 是否开启下拉刷新
+  "backgroundTextStyle":"drak"   // 下拉 loading 的样式，仅支持dark/light
+}

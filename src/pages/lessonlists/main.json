@@ -1,5 +1,5 @@
 {
-	"navigationBarTitleText": "首页",
+	"navigationBarTitleText": "资料列表",
   "usingComponents": {
     "i-row": "../../../static/iview/row/index",
     "i-col": "../../../static/iview/col/index",
@@ -14,4 +14,3 @@
     "i-notice-bar": "../../../static/iview/notice-bar/index"
   }
 }
-

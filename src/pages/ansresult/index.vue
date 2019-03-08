@@ -67,8 +67,7 @@
           this.percent = res.data.user_lesson_right_percent
           this.point = res.data.user_lesson_point
           if(res.data.user_lesson_right_percent<60)
-          {
-          
+          {      
           this.status='失败'
           }
         })

@@ -7,6 +7,7 @@ const rankListUrl='/v1/rank/list'
 const examUrl='/v1/examination/save'
 const todayLessonUrl='/v1/lesson/today'
 const lessonListUrl='/v1/lesson/list'
+const datumListUrl='/v1/datum/list'
 
 
 // const userInfoUrl = '/v1/user/info' // 用户信息
@@ -65,5 +66,6 @@ export default {
   getUserInfo,
   todayLessonUrl,
   rankListUrl,
-  lessonListUrl
+  lessonListUrl,
+  datumListUrl
 }

@@ -13,7 +13,7 @@
     "pages/logs/main",
     "pages/counter/main",
     "pages/toast/main",
-
+    "pages/lessonlists/main",
     "pages/examination/main"
   ],
   "window": {

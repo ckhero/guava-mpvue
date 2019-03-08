@@ -11,8 +11,8 @@
 <div v-for="(studyPlan, index) in todayData" :key="index" >
 	<view class='item' style="margin-left: 20rpx;" >第{{ studyPlan.day }}天</view>
 	<i-row  offset="2" span="20" i-class="border"  v-for="(lessonInfo, index1) in studyPlan.lessons" :key="index1">
-		<i-col offset="" span="10" style="line-height:125rpx" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
-		<i-col offset="4" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style=""type="primary" inline="true" size="" i-class="buttonAnswer">{{lessonInfo.status}}</i-button></i-col>
+		<i-col offset="2" span="10" style="line-height:125rpx" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
+		<i-col offset="4" span="4" ><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style=""type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"锁":"已完成")}}</i-button></i-col>
 	</i-row>
 </div>
     <!--<view class='border' :wx:for="{{ todayData }}" 	wx:for-item="studyPlan" bindtap='' >

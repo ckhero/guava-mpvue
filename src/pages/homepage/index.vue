@@ -14,7 +14,7 @@
               </i-col>
             </i-row>
             <i-row i-class="title-text">
-              <i-col span="8">打卡：{{sign_day}}</i-col>
+              <i-col span="8" >打卡：{{sign_day}}</i-col>
               <i-col span="8">积分：{{point}}</i-col>
               <i-col span="8" is-link="true">
                 <a href="../ranking/main" target="_blank" style="text-decoration: underline">排名：{{rank}}</a>
@@ -24,7 +24,7 @@
         </i-row>
         <i-row i-class="notice-bar">
           <i-notice-bar icon="systemprompt">
-            点击获取最新的学习资料
+            <a href="../lessonlists/main">点击获取最新的学习资料</a>
           </i-notice-bar>
         </i-row>
         <i-row>
