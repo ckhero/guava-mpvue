@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/loading/main",
+    "pages/index/main",
     "pages/share/main",
     "pages/learn/main",
     "pages/answer/main",
@@ -9,7 +10,7 @@
     "pages/homepage/main",
     "pages/allclass/main",
     "pages/todaystudy/main",
-    "pages/index/main",
+    "pages/singleclass/main",
     "pages/logs/main",
     "pages/counter/main",
     "pages/toast/main",

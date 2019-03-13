@@ -4,15 +4,30 @@
     	<view style="margin-left: 20rpx;font-weight:bold;">
     		学习列表:
     	</view>
-    	<view class='item'><a href="../allclass/main" target="_blank" class="allclass">全部课程 ></a>
-    		
-    	</view>
     </view>
 <div v-for="(studyPlan, index) in todayData" :key="index" >
-	<view class='item' style="margin-left: 80rpx;" >第{{ studyPlan.day }}天</view>
 	<i-row  offset="2" span="20" i-class="border"  v-for="(lessonInfo, index1) in studyPlan.lessons" :key="index1">
-		<i-col offset="2" span="10" style="line-height:125rpx" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
-		<i-col offset="4" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style=""type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
+		<view :wx:if="lesson_id==1">
+		  <view :wx:if="lessonInfo.lesson_type=='英语'" style="border-bottom: 1rpx solid #efefef;">
+			
+		<i-col offset="2" span="10" style="line-height:125rpx;margin-left: 80rpx;" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
+		<i-col offset="4" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style="color: #4876FF;margin-left: 250rpx;"type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
+		</view>
+		</view>
+		<view :wx:elif="lesson_id==2">
+			<view :wx:if="lessonInfo.lesson_type=='数学'" style="border-bottom: 1rpx solid #efefef;">
+			
+		<i-col offset="2" span="10" style="line-height:125rpx;margin-left: 80rpx;" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
+		<i-col offset="4" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style="color: #4876FF;margin-left: 250rpx;"type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
+		</view>
+		</view>
+		<view :wx:elif="lesson_id==3">
+			<view :wx:if="lessonInfo.lesson_type=='逻辑'" style="border-bottom: 1rpx solid #efefef;">
+			
+		<i-col offset="2" span="10" style="line-height:125rpx;margin-left: 80rpx;" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
+		<i-col offset="4" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style="color: #4876FF;margin-left: 250rpx;"type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
+		</view>
+		</view>
 	</i-row>
 </div>
  </view>
@@ -26,38 +41,24 @@
 	data(){
     	return {
     		todayData:null,
-    		done: null,
-    		total:60,
-    		perNum:null
+    		lesson_id:null
     }
-    	},
-
+    },
     components: {
     },
-
     mounted () {
-		this.getTodayLesson(),
-		this.getUserInfo()
-    },
-    
+		this.getEngLesson()
+    },  
+    onLoad (options) {
+    this.lesson_id = options['id']
+  },
     methods: {
-      getTodayLesson (res) {
-        this.api.v1.lesson.todaylesson({}).then(res => {
+      getEngLesson (res) {
+        this.api.v1.lesson.list({}).then(res => {
           this.todayData=res.data
           console.log( this.todayData)
         })
       },
-      getUserInfo (res) {
-        this.api.v1.user.info({}).then(res => {
-          this.done = res.data.sign_day
-          per=res.data.sign_day*2/this.total         
-          this.perNum=Math.floor(100*this.done/this.total)
-          this.drawCircle(per)
-          console.log(res)  
-        })
-      },
-     
-
      toanswer(lesson_id,status){
      	const url="../todaystudy/main?id="+lesson_id
      	if(status=="init")
@@ -65,11 +66,12 @@
       		wx.navigateTo({url})
       	}
       	else
-      	{   		
-      	}    	
-     }    
-      },
+      	{     		
+      	}     	
+     }
+     },
     created () {
+      // let app = getApp()
     }
   }
 </script>

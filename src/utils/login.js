@@ -38,6 +38,7 @@ function doLogin () {
           }
         })
       } else {
+
         wx.navigateTo({ url: authUrl })
         console.log('用户还未授权过')
       }
