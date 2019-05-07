@@ -18,8 +18,12 @@ const v1 = {
   rank: {
     list: data => request('v1/rank/list', 'post', data)
   },
-  datum:{
+  datum: {
     list: data => request('v1/datum/list', 'post', data)
+  },
+  order: {
+    book: data => request('v1/order/book', 'post', data),
+    fail: data => request('v1/order/fail', 'post', data)
   }
 }
 
