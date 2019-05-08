@@ -5,7 +5,8 @@
     <view class='content'>
       <text style='margin-left:100rpx;margin-bottom: 20rpx;'>允许微信授权后，开启你的答题之旅</text>
     </view>
-    <button plain="true" class='home' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 10rpx;color: #ffffff;font-size: 40rpx;" >授权登录</button>
+    <button  open-type="getUserInfo"  @getuserinfo="bindGetUserInfo"  >授权手机号</button>
+    <button plain="true" class='home' bindgetuserinfo="getUserInfo" open-type="getPhoneNumber" @click="getUserInfo1" bindgetphonenumber="getPhoneNumber"  style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 10rpx;color: #ffffff;font-size: 40rpx;">获取手机号</button>
   </div>
 
 </template>
@@ -21,6 +22,11 @@
     mounted () {
     },
     methods: {
+    	getPhoneNumber(e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
+  },
       getUserInfo1 () {
         console.log('click事件首先触发')
         // 判断小程序的API，回调，参数，组件等是否在当前版本可用。  为false 提醒用户升级微信版本

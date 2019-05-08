@@ -43,6 +43,7 @@
     methods: {
       getTodayLesson (res) {
         this.api.v1.lesson.list({}).then(res => {
+          
           this.todayData=res.data
           console.log( this.todayData)
         })

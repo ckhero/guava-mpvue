@@ -19,6 +19,11 @@
     </i-row>
     <i-row>
       <i-col offset="8" span="8" i-class="col-class share-button">
+        <a href="../phone/main">查看解析</a>
+      </i-col>
+    </i-row>
+    <i-row>
+      <i-col offset="8" span="8" i-class="col-class share-button">
         <i-button type="primary" open-type="share">分享</i-button>
       </i-col>
     </i-row>

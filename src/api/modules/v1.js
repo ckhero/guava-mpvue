@@ -9,7 +9,8 @@ const v1 = {
   lesson: {
     detail: data => request('v1/lesson/detail', 'post', data),
     todaylesson: data => request('v1/lesson/today', 'post', data),
-    list: data => request('v1/lesson/list', 'post', data)
+    list: data => request('v1/lesson/list', 'post', data),
+    pay_status: data => request('v1/lesson/pay-status', 'post', data)
   },
   examination: {
     submit: data => request('v1/examination/save', 'post', data),
@@ -20,6 +21,9 @@ const v1 = {
   },
   datum:{
     list: data => request('v1/datum/list', 'post', data)
+  },
+  order:{
+    book: data => request('v1/order/book', 'post', data)
   }
 }
 

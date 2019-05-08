@@ -131,6 +131,7 @@
     methods: {
       getUserInfo (res) {
         this.api.v1.user.info({}).then(res => {
+        	  
           this.name = res.data.name
           this.head = res.data.head_img
           this.point = res.data.point
@@ -147,10 +148,12 @@
       		this.right_type_num=res.data.today.right_type_num
       		this.type_num=res.data.today.type_num
       		console.log(res)
+      		
       	})
       },
 
       switchtostudy () {
+      	
         const url = '../learn/main?id=11'
         wx.navigateTo({ url })
       },
