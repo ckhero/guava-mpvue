@@ -11,21 +11,21 @@
 		  <view :wx:if="lessonInfo.lesson_type=='英语'" style="border-bottom: 1rpx solid #efefef;">
 			
 		<i-col offset="2" span="10" style="line-height:125rpx;margin-left: 80rpx;" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
-		<i-col offset="4" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style="color: #4876FF;margin-left: 250rpx;"type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
+		<i-col offset="2" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style="color: #4876FF;margin-left:200rpx;"type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
 		</view>
 		</view>
 		<view :wx:elif="lesson_id==2">
 			<view :wx:if="lessonInfo.lesson_type=='数学'" style="border-bottom: 1rpx solid #efefef;">
 			
 		<i-col offset="2" span="10" style="line-height:125rpx;margin-left: 80rpx;" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
-		<i-col offset="4" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style="color: #4876FF;margin-left: 250rpx;"type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
+		<i-col offset="4" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style="color: #4876FF;margin-left: 200rpx;"type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
 		</view>
 		</view>
 		<view :wx:elif="lesson_id==3">
 			<view :wx:if="lessonInfo.lesson_type=='逻辑'" style="border-bottom: 1rpx solid #efefef;">
 			
 		<i-col offset="2" span="10" style="line-height:125rpx;margin-left: 80rpx;" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
-		<i-col offset="4" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style="color: #4876FF;margin-left: 250rpx;"type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
+		<i-col offset="4" span="4"><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style="color: #4876FF;margin-left: 200rpx;"type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
 		</view>
 		</view>
 	</i-row>
