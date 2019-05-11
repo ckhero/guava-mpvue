@@ -1,4 +1,5 @@
 import {getToken, delToken} from '@/utils/token'
+import {setPhone} from '@/utils/login'
 // import {fail} from '@/pages/toast'
 
 const host = 'https://guava.51qwer.com/'
@@ -19,6 +20,11 @@ function request (url, method = 'post', data = {}, header = {}) {
       success: function (res) {
         if (res.data.code === 101003) {
           delToken()
+          reject(res.data.message)
+        }
+
+        if (res.data.code === 101010) {
+          setPhone()
           reject(res.data.message)
         }
         if (res.data.code !== 0) {

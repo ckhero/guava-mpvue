@@ -5,20 +5,31 @@
     <view class='content'>
       <text style='margin-left:100rpx;margin-bottom: 20rpx;'>允许微信授权后，开启你的答题之旅</text>
     </view>
-    <button plain="true" class='home' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 10rpx;color: #ffffff;font-size: 40rpx;" >授权登录</button>
+    <button v-show="action !== 'phone'" plain="true" class='home' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 10rpx;color: #ffffff;font-size: 40rpx;">授权登录</button>
+    <button v-show="action == 'phone'" plain="true" class='home' bindgetphonenumber="getPhone" open-type="getPhoneNumber" @getphonenumber="getPhone" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 10rpx;color: #ffffff;font-size: 40rpx;">授权手机号码</button>
   </div>
 
 </template>
 
 <script>
   import {doLogin} from '@/utils/login'
+  import {getCode} from '@/utils/code'
 
   export default {
     data () {
-      return {}
+      return {
+        action: 'login'
+      }
     },
     components: {},
     mounted () {
+    },
+    onLoad: function (options) {
+      this.action = decodeURIComponent(options.action)
+      console.log(this.action)
+      if (this.action === 'phone') {
+        this.setSessionKey()
+      }
     },
     methods: {
       getUserInfo1 () {
@@ -41,6 +52,46 @@
           // 用户按了拒绝按钮
           console.log('用户按了拒绝按钮')
         }
+      },
+      getPhone (e) {
+        console.log(e)
+        console.log(e.detail)
+        let homeUrl = '../homepage/main'
+        // let _global = global
+        console.log(wx.getStorageSync('code'))
+        if (e.mp.detail.iv) {
+          // 用户按了允许授权按钮
+          console.log('用户按了允许获取手机号码')
+          let _this = this
+          wx.login({
+            success (res) {
+              _this.api.v1.user.setPhone({
+                iv: e.mp.detail.iv,
+                encryptedData: e.mp.detail.encryptedData,
+                code: res.code
+              }).then(res => {
+                console.log('succ')
+                wx.navigateTo({ url: homeUrl })
+              })
+            }
+          })
+        } else {
+          // 用户按了拒绝按钮
+          console.log('用户按了拒绝按钮')
+        }
+      },
+      setSessionKey () {
+        let _this = this
+        wx.login({
+          success (res) {
+            _this.api.v1.user.setSessionKey({
+              code: res.code
+            }).then(res => {
+              console.log('sessionkey设置成')
+              console.log(res)
+            })
+          }
+        })
       }
     },
     created () {
