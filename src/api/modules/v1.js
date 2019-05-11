@@ -9,7 +9,9 @@ const v1 = {
   lesson: {
     detail: data => request('v1/lesson/detail', 'post', data),
     todaylesson: data => request('v1/lesson/today', 'post', data),
-    list: data => request('v1/lesson/list', 'post', data)
+    list: data => request('v1/lesson/list', 'post', data),
+    pay_status: data => request('v1/lesson/pay-status', 'post', data),
+    review: data => request('v1/lesson/review', 'post', data)
   },
   examination: {
     submit: data => request('v1/examination/save', 'post', data),

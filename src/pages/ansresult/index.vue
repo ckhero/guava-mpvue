@@ -19,18 +19,15 @@
     </i-row>
     <i-row>
       <i-col offset="8" span="8" i-class="col-class share-button">
+        <i-button @click="toexplantion()" type="primary" long="true" size	="large" i-class="buttonAnswer">查看解析</i-button>
+      </i-col>
+    </i-row>
+    <i-row>
+      <i-col offset="8" span="8" i-class="col-class share-button">
         <i-button type="primary" open-type="share">分享</i-button>
       </i-col>
     </i-row>
   </div>
-	<!--<view class="page">-->
-
-	<!--<view style="text-align: center;margin-top: 30rpx;">挑战{{status}}</view>-->
-	<!--<view style="text-align: center;">奖励已经发至您的账户</view>-->
-	<!--<view style="text-align: center;">另外您将获得{{point}}积分</view>-->
-	<!--<button style='opacity: 1;width: 200rpx;margin-top: 300rpx;'  bindtap='onShareAppMessage' open-type="share">分享</button>-->
-
-	<!--</view>-->
 </template>
 
 <script>
@@ -60,6 +57,10 @@
     mounted () {
     },
     methods: {
+    	toexplantion () {
+      const url = '../lessonExplantion/main?id=' + this.lesson_id
+      wx.navigateTo({ url })
+    },
       getExaminationResult (lessonId) {
         this.api.v1.examination.result({
           id: lessonId

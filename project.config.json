@@ -10,7 +10,7 @@
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-	"appid": "wxbdda40128fda63c7",
+	"appid": "wxfc3abbaf412150d2",
 	"projectname": "guava-mpvue",
 	"condition": {
 		"search": {

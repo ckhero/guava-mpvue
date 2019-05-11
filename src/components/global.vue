@@ -9,5 +9,6 @@ export default
   homePageUrl: '../homepage/main',
   loadingPageUrl: '../loading/main',
   authPageUrl: '../index/main',
+  getPhoneUrl:'../phone/main'
 }
 </script>

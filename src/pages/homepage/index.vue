@@ -34,16 +34,16 @@
         </i-row>
         <i-row>
           <i-col span="7" i-class="lesson-info">
-            <i-col span="24">英语</i-col>
-            <i-col span="24">{{english.done}}/{{english.total}}</i-col>
+            <i-col span="24"><a href="../singleclass/main?id=1">英语</a></i-col>
+            <i-col span="24"><a href="../singleclass/main?id=1">{{english.done}}/{{english.total}}</a></i-col>
           </i-col>
           <i-col offset="1" span="8" i-class="lesson-info">
-            <i-col span="24">数学</i-col>
-            <i-col span="24">{{math.done}}/{{math.total}}</i-col>
+            <i-col span="24"><a href="../singleclass/main?id=2">数学</a></i-col>
+            <i-col span="24"><a href="../singleclass/main?id=2">{{math.done}}/{{math.total}}</a></i-col>
           </i-col>
           <i-col offset="1" span="7" i-class="lesson-info">
-            <i-col span="24">逻辑</i-col>
-            <i-col span="24">{{logic.done}}/{{logic.total}}</i-col>
+            <i-col span="24"><a href="../singleclass/main?id=3">逻辑</a></i-col>
+            <i-col span="24"><a href="../singleclass/main?id=3">{{logic.done}}/{{logic.total}}</a></i-col>
           </i-col>
         </i-row>
         <i-row i-class="today-processing">
@@ -131,6 +131,7 @@
     methods: {
       getUserInfo (res) {
         this.api.v1.user.info({}).then(res => {
+        	  
           this.name = res.data.name
           this.head = res.data.head_img
           this.point = res.data.point
@@ -147,10 +148,12 @@
       		this.right_type_num=res.data.today.right_type_num
       		this.type_num=res.data.today.type_num
       		console.log(res)
+      		
       	})
       },
 
       switchtostudy () {
+      	
         const url = '../learn/main?id=11'
         wx.navigateTo({ url })
       },

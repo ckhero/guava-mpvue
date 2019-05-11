@@ -62,6 +62,7 @@
         this.api.v1.rank.list({}).then((res) => {
           this.rankList = res.data
           console.log(this.rankList)
+          
         })
       },
       getUserInfo (res) {

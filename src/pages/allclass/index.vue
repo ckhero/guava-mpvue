@@ -4,22 +4,16 @@
         <canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas>
         <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas>
         <view class="progress_text">
-            <!--<view class="progress_dot"></view> -->
             <text class='progress_info'> {{perNum}}%</text>
         </view>
     </div>
 <div v-for="(studyPlan, index) in todayData" :key="index" >
-	<view class='item' style="margin-left: 20rpx;" >第{{ studyPlan.day }}天</view>
+	<view class='item' style="margin-left: 80rpx;" >第{{ studyPlan.day }}天</view>
 	<i-row  offset="2" span="20" i-class="border"  v-for="(lessonInfo, index1) in studyPlan.lessons" :key="index1">
-		<i-col offset="2" span="10" style="line-height:125rpx" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
-		<i-col offset="4" span="4" ><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style=""type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"锁":"已完成")}}</i-button></i-col>
+		<i-col offset="2" span="10" style="line-height:100rpx" >{{lessonInfo.lesson_type}}:{{lessonInfo.lesson_name}}</i-col>
+		<i-col offset="4" span="4" ><i-button  @click="toanswer(lessonInfo.lesson_id,lessonInfo.status)" style=""type="primary" inline="true" size="" i-class="buttonAnswer">{{(lessonInfo.status=="init")?"未完成":((lessonInfo.status=="lock")?"🔒":"已完成")}}</i-button></i-col>
 	</i-row>
 </div>
-    <!--<view class='border' :wx:for="{{ todayData }}" 	wx:for-item="studyPlan" bindtap='' >
-    	      <view class='item' >第{{ studyPlan.day }}天</view>
-    	     </view>
-   </view>-->
-    <!--<button  @click="toanswer" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 80rpx;color: #ffffff;font-size: 40rpx;" >开始答题</button>-->
  </view>
 </template>
 <script>
@@ -49,6 +43,7 @@
     methods: {
       getTodayLesson (res) {
         this.api.v1.lesson.list({}).then(res => {
+          
           this.todayData=res.data
           console.log( this.todayData)
         })
@@ -75,7 +70,7 @@
       	}
       	else
       	{
-
+           
       	}
 
      },
@@ -148,8 +143,11 @@ position: absolute;
 .progress_info{
   font-size: 36rpx;
 
-  padding-left: 14rpx;
-  letter-spacing: 2rpx
+  
+  letter-spacing: 2rpx;
+  display: flex !important;
+justify-content: center !important;
+align-items: center !important;
 }
 .progress_dot{
   width:16rpx;
@@ -184,8 +182,11 @@ margin-left:20rpx;
 .buttonAnswer{
 
 margin-left:40rpx !important;
-width:160rpx !important;
-height:80rpx !important;
+width:120rpx !important;
+height:60rpx !important;
+display: flex !important;
+justify-content: center !important;
+align-items: center !important;
 
   }
 
