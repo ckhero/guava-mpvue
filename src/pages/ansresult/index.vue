@@ -19,7 +19,7 @@
     </i-row>
     <i-row>
       <i-col offset="8" span="8" i-class="col-class share-button">
-        <i-button @click="toexplantion()" type="primary" long="true" size	="large" i-class="buttonAnswer">查看解析</i-button>
+        <i-button @click="toexplantion(this.lesson_id)" type="primary" long="true" size	="large" i-class="buttonAnswer">查看解析</i-button>
       </i-col>
     </i-row>
     <i-row>
@@ -39,31 +39,34 @@
 
       }
     },
+    data () {
+      return {
+        percent: null,
+        point: null,
+        status:'成功',
+        lesson_id:null
+      }
+    },
     onUnload: function () {
       const url = this.global.homePageUrl
       wx.reLaunch({url})
     },
     onLoad: function (options) {
+    	 this.lesson_id = options['id'],
       this.getExaminationResult(options['id'])
     },
-    data () {
-      return {
-        percent: null,
-        point: null,
-        status:'成功'
-      }
-    },
+    
     components: {},
     mounted () {
     },
     methods: {
-    	toexplantion () {
-      const url = '../lessonExplantion/main?id=' + this.lesson_id
+    	toexplantion (lesson_id) {
+      const url = '../lessonExplantion/main?id=' +lesson_id
       wx.navigateTo({ url })
     },
-      getExaminationResult (lessonId) {
+      getExaminationResult (id) {
         this.api.v1.examination.result({
-          id: lessonId
+          id: id
         }).then((res) => {
           this.percent = res.data.user_lesson_right_percent
           this.point = res.data.user_lesson_point

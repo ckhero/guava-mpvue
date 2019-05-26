@@ -28,24 +28,21 @@
         currQuestionNum: 1,
         questions: [],
         question: [],
-        options: [],
-        answer: {
-          id: '',
-          options: []
-        },
+        
+        
         test: null
       }
     },
     onLoad (options) {
-    this.lesson_id = options['id']
-    
+    this.lesson_id = options['id'],
+    this.getLessonReview (options['id'])
   },
 
     components: {},
 
     mounted () {
-      this.getLessonReview (this.lesson_id),
-      this.getUserInfo()
+      
+     this.getUserInfo()
     },
 
     methods: {
