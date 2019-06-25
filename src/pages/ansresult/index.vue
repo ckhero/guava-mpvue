@@ -19,7 +19,7 @@
     </i-row>
     <i-row>
       <i-col offset="8" span="8" i-class="col-class share-button">
-        <i-button @click="toexplantion(this.lesson_id)" type="primary" long="true" size	="large" i-class="buttonAnswer">查看解析</i-button>
+        <i-button @click="toexplantion()" type="primary" long="true" size	="large" i-class="buttonAnswer">查看解析</i-button>
       </i-col>
     </i-row>
     <i-row>
@@ -60,8 +60,8 @@
     mounted () {
     },
     methods: {
-    	toexplantion (lesson_id) {
-      const url = '../lessonExplantion/main?id=' +lesson_id
+    	toexplantion() {
+      const url = '../lessonExplantion/main?id=' +this.lesson_id
       wx.navigateTo({ url })
     },
       getExaminationResult (id) {
