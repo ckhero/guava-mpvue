@@ -2,7 +2,7 @@ import {getToken, delToken} from '@/utils/token'
 import {setPhone} from '@/utils/login'
 // import {fail} from '@/pages/toast'
 
-const host = 'https://guava.51qwer.com/'
+const host = 'https://www.goodexam.com.cn/'
 
 function request (url, method = 'post', data = {}, header = {}) {
   wx.showLoading({
