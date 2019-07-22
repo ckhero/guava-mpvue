@@ -6,8 +6,8 @@
         <i-col offset="1" span="22">
           <i-row i-class="row-style">
             <!--{{item.lesson_question_explanation}}-->
-            <view  :wx:if="question.lesson_question_explanation_type === 'text'"><text class="textMain">{{ item.lesson_question_explanation}}</text></view>
-        		<view wx:else><image class="userPhoto"  :src="item.lesson_question_explanation"  mode="widthFix" /></view>
+            <view :wx:if="item.lesson_question_explanation_type === 'text'" >{{ item.lesson_question_explanation}}</view>
+        		<view wx:else><image   :src="item.lesson_question_explanation"   /></view>
           </i-row>
         </i-col>
       </i-row>

@@ -40,7 +40,9 @@ function doLogin () {
                 }
               })
             } else {
-              wx.navigateTo({ url: homeUrl })
+              //wx.navigateTo({ url: homeUrl })
+//			  wx.switchTab({ url: homeUrl })
+			  wx.redirectTo({ url: homeUrl })
               return true
             }
           }

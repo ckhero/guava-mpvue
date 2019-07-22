@@ -83,6 +83,7 @@
               }).then(res => {
                 console.log('succ')
                 wx.navigateTo({ url: homeUrl })
+//				switchTab({ url: homeUrl })
               })
             }
           })
