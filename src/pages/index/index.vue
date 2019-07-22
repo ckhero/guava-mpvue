@@ -2,8 +2,9 @@
   <div>
     <!--<button open-type="getUserInfo" @getuserinfo="bindGetUserInfo" @click="getUserInfo1">999</button>
     <view class='picture' style="background-image:url('/static/images/8-01.png'); no-repeat 0 center;">
-        <input name="" type="button" v-show="action !== 'phone'" plain="true" class='home' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" style=" width:200px; height:60px;margin-top=400px;  border:0; background:url('/static/images/授权登录.jpeg') no-repeat center" />
-
+        <div  style="margin-top:400px">
+        <input name="" type="button" v-show="action !== 'phone'" plain="true" class='home' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" style=" width:200px; height:60px;margin-top:400px;  border:0; background:url('/static/images/授权登录.jpeg') no-repeat center" />
+        </div>
     </view>-->
     <image class='picture' src='/static/images/8-01.png' >
     </image>
