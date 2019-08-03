@@ -27,8 +27,8 @@
 	data(){
     	return {
     		todayData:null,
-    		done: null,
-    		total:60,
+    		done: 0,
+    		total:0,
     		perNum:null
     }
     	},
@@ -43,19 +43,30 @@
     methods: {
       getTodayLesson (res) {
         this.api.v1.lesson.list({}).then(res => {
-          
+
           this.todayData=res.data
           console.log( this.todayData)
         })
       },
       getUserInfo (res) {
-        this.api.v1.user.info({}).then(res => {
-          this.done = res.data.sign_day
-          per=res.data.sign_day*2/this.total
+        this.api.v1.user.index({}).then(res => {
+          console.log('user.index', res.data.schedule)
+          let _this = this
+          let scheduleData = res.data.schedule
+          Object.keys(scheduleData).forEach(key => {
+            let val = scheduleData[key]
+            _this.done += val.done
+            _this.total += val.total
+          })
+          console.log('done=', _this.done)
+          console.log('total', _this.total)
+          per=Math.round(100 * _this.done/_this.total)
 
-          this.perNum=Math.floor(100*this.done/this.total)
-          this.drawCircle(per)
-          console.log(res)
+          this.perNum = per
+          console.log('per=', per)
+          console.log('perNum=', this.perNum)
+          this.drawCircle(per / 100)
+
 
         })
       },
@@ -63,7 +74,7 @@
 
      toanswer(lesson_id,status){
      	const url="../todaystudy/main?id="+lesson_id
-     	
+
         if(status=="init")
       	{
       		wx.navigateTo({url})
@@ -77,7 +88,7 @@
       	}
       	else
       	{
-           
+
       	}
 
      },
@@ -150,7 +161,7 @@ position: absolute;
 .progress_info{
   font-size: 36rpx;
 
-  
+
   letter-spacing: 2rpx;
   display: flex !important;
 justify-content: center !important;
