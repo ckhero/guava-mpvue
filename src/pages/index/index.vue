@@ -8,16 +8,15 @@
     </view>-->
     <image class='picture' src='/static/images/8-01.png' >
     </image>
-    	<view class='content'>
-      <text style='margin-left:100rpx;margin-bottom: 20rpx;'>允许微信授权后，开启你的答题之旅</text>
+    	<view class="text-bottom" >
+      <text class="content">允许微信授权后，开启你的答题之旅</text>
       <!--<input name="" type="button" v-show="action !== 'phone'" plain="true" class='home' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" style=" width:200px; height:60px;margin-top=400px;  border:0; background:url('/static/images/授权登录.jpeg') no-repeat center" />
     <input name="" type="button" v-show="action == 'phone'" plain="true" class='home' bindgetphonenumber="getPhone" open-type="getPhoneNumber" @getphonenumber="getPhone" style=" width:200px; height:60px;  border:0; background:url('/static/images/授权登录.jpeg') no-repeat center" />-->
+        <button v-show="action !== 'phone'" plain="true" class='auth-button' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" >授权登录</button>
+        <button v-show="action == 'phone'" plain="true" class='auth-button' bindgetphonenumber="getPhone" open-type="getPhoneNumber" @getphonenumber="getPhone" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 10rpx;color: #ffffff;font-size: 40rpx;">接收通知</button>
+      </view>
 
-    </view>
 
-    <button v-show="action !== 'phone'" plain="true" class='home' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 10rpx;color: #ffffff;font-size: 40rpx; " >授权登录</button>
-    <button v-show="action == 'phone'" plain="true" class='home' bindgetphonenumber="getPhone" open-type="getPhoneNumber" @getphonenumber="getPhone" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 10rpx;color: #ffffff;font-size: 40rpx;">接收通知</button>
-    
   </div>
 
 </template>
@@ -113,15 +112,40 @@
 </script>
 
 <style scoped>
+  .text-bottom{
+    position:fixed;
+    bottom:50rpx;
+    margin:0 auto;
+    width:100%;
+    text-align:center;
+
+  }
+  .auth-button {
+    border:0;
+    width: 450rpx;
+    height: 100rpx;
+    background-color: #5CACEE;
+    border-radius: 15rpx;
+    text-align: center;
+    line-height: 100rpx;
+    color: #ffffff;
+    font-size: 40rpx;
+    left: 50%;
+    margin-left: -225rpx;
+  }
   .picture{
-    width: 800rpx;
-    height: 1210rpx;
+    width:800rpx;
+    height:auto;
+    position:fixed;
+    bottom:150rpx;
+    top:10rpx;
+
 
   }
   .content{
     font-size: 30rpx;
     color: #595758;
-    margin: 10rpx 20rpx 0rpx 30rpx;
+    margin-buttom: 10rpx;
   }
   .userinfo {
     display: flex;
