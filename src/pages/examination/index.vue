@@ -105,7 +105,7 @@
         })
       },
       choseOption (optionId) {
-        this.answer.options[this.question.lesson_question_id] = {lesson_question_id: this.question.lesson_question_id, option: optionId}
+        this.answer.options.push({lesson_question_id: this.question.lesson_question_id, option: optionId})
         Object.keys(this.questions[this.currQuestionNum].options).forEach((item, index) => {
           this.questions[this.currQuestionNum]['options'][item]['check'] = item === optionId
         })
