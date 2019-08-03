@@ -48,7 +48,7 @@ function doLogin () {
           }
         })
       } else {
-        wx.navigateTo({ url: authUrl })
+        wx.redirectTo({ url: authUrl })
         console.log('用户还未授权过')
       }
     }
