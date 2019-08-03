@@ -13,7 +13,7 @@
       <!--<input name="" type="button" v-show="action !== 'phone'" plain="true" class='home' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" style=" width:200px; height:60px;margin-top=400px;  border:0; background:url('/static/images/授权登录.jpeg') no-repeat center" />
     <input name="" type="button" v-show="action == 'phone'" plain="true" class='home' bindgetphonenumber="getPhone" open-type="getPhoneNumber" @getphonenumber="getPhone" style=" width:200px; height:60px;  border:0; background:url('/static/images/授权登录.jpeg') no-repeat center" />-->
         <button v-show="action !== 'phone'" plain="true" class='auth-button' bindgetuserinfo="getUserInfo" open-type="getUserInfo"  @getuserinfo="bindGetUserInfo" @click="getUserInfo1" >授权登录</button>
-        <button v-show="action == 'phone'" plain="true" class='auth-button' bindgetphonenumber="getPhone" open-type="getPhoneNumber" @getphonenumber="getPhone" style="border:0;width: 450rpx;height: 100rpx;background-color: #5CACEE;border-radius: 15rpx;text-align: center;line-height: 100rpx;margin-left: auto;margin-right: auto;margin-top: 10rpx;color: #ffffff;font-size: 40rpx;">接收通知</button>
+        <button v-show="action == 'phone'" plain="true" class='auth-button' bindgetphonenumber="getPhone" open-type="getPhoneNumber" @getphonenumber="getPhone">接收通知</button>
       </view>
 
 
