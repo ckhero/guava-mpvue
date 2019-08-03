@@ -7,7 +7,7 @@
       <i-col span="24" i-class="col-class"><text class="title">  题目</text></i-col>
 
       <i-col span="24" i-class="col-class spanMain">
-        <view  :wx:if="question.lesson_question_type === 'img'"><image class="userPhoto"  :src="question.lesson_question_detail"  mode="widthFix" /></view>
+        <view  :wx:if="question.lesson_question_type === 'img'"><image bindtap='previeIm' class="userPhoto"  :src="question.lesson_question_detail"   mode="widthFix" /></view>
         <view wx:else><text class="textMain">{{ question.lesson_question_detail}}</text></view>
       </i-col>
       <i-col span="24" i-class="col-class"><text class="title" style="margin-top:40rpx">  选项</text></i-col>
@@ -52,6 +52,7 @@
         test: null
       }
     },
+   
     onLoad (options) {
       this.question = []
       this.submitConfirm = false
@@ -75,6 +76,22 @@
       }
     },
     methods: {
+    	 previeIm:function(e) {
+
+		var img = e.currentTarget.dataset.src;  //需要保存图片的路径
+		
+		console.log(img);
+		
+		wx.previewImage({
+		
+		current: img, // 当前显示图片的http链接
+		
+		urls: [img] // 需要预览的图片http链接列表
+		
+		})
+		
+		},
+    	
       getLessonDetail (id) {
         this.api.v1.lesson.detail({
           id: id
@@ -122,6 +139,7 @@
           })
         }
       },
+      
       nextQuestion () {
         if (this.currQuestionNum < this.total) {
           this.currQuestionNum += 1

@@ -67,7 +67,7 @@
       </i-col>
     </i-row>
     <div class="mask" v-if="contact" @click="hideContact">
-      <img src="../../../static/images/ck.jpeg" alt="" class="mask-img"/>
+      <img src="../../../static/images/kefu.jpeg" alt="" class="mask-img"/>
     </div>
     <template>
       <radial-progress-bar :diameter="200"
@@ -79,7 +79,7 @@
     </template>
     <modal title="答题挑战规则说明" :hidden="modalHidden" @click="modalConfirm" showCancel="true" >
     <view>
-    <img class="image" src="/static/images/learn.png" mode='aspectFill'/>
+    <img class="image" src="/static/images/rule.jpeg" />
     </view>
     </modal>
   </div>

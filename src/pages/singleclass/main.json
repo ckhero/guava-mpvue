@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "全部课程",
+  "usingComponents": {
+    "i-row": "../../../static/iview/row/index",
+    "i-col": "../../../static/iview/col/index",
+    "i-button": "../../../static/iview/button/index",
+    "i-modal": "../../../static/iview/modal/index",
+    "i-card": "../../../static/iview/card/index",
+    "i-cell-group": "../../../static/iview/cell-group/index",
+    "i-cell": "../../../static/iview/cell/index",
+    "i-avatar": "../../../static/iview/avatar/index",
+    "i-divider": "../../../static/iview/divider/index"
+  }
+}
