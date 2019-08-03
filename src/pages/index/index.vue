@@ -137,10 +137,8 @@
     width:800rpx;
     height:auto;
     position:fixed;
-    bottom:150rpx;
-    top:10rpx;
-
-
+    bottom:0px;
+    top:0rpx;
   }
   .content{
     font-size: 30rpx;
