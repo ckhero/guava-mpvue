@@ -39,7 +39,8 @@
 
         return {
             title: title, //转发的标题。当前小程序名称
-            path: 'pages/ordinaryDetails/ordinaryDetails?isShare=0', //转发的路径
+            path: 'page/loading'
+            //path: 'pages/ordinaryDetails/ordinaryDetails?isShare=0', //转发的路径
 //          imageUrl: '',//自定义图片路径 支持PNG及JPG。显示图片长宽比是 5:4。
             
         }
