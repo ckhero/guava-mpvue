@@ -33,11 +33,22 @@
 <script>
   export default {
     onShareAppMessage: function () {
-      return {
-        title: '答题成功',
-        path: '/page/user?id=123'
+    	if (ops.from === 'button') {
+            var title = ops.target.dataset.title;
+        };
 
-      }
+        return {
+            title: title, //转发的标题。当前小程序名称
+            path: 'pages/ordinaryDetails/ordinaryDetails?isShare=0', //转发的路径
+//          imageUrl: '',//自定义图片路径 支持PNG及JPG。显示图片长宽比是 5:4。
+            
+        }
+//    return {
+//    	
+//      title: '答题成功',
+//      path: '/page/loading'
+//
+//    }
     },
     data () {
       return {
