@@ -1,36 +1,49 @@
 <template>
   <div>
     <i-row>
-      <i-col offset="8" span="8" i-class="col-class">
-        <view class="point">
-          <i-col span="24" i-class="col-class point-text point-text-top">
-            正确率
-          </i-col>
-          <i-col span="24" i-class="col-class point-text">
-            {{percent}}%
-          </i-col>
-        </view>
+
+      <i-col span="24" i-class="col-class">
+        <div class="contentbox">
+          <CircleProgress unit="400" :percent="percent" canvasId="progress"
+                          strokeType="round"
+                          strokeWidth="16"
+                          stroke-bg-color="#e3effd"
+                          ondragstart="0"
+                          stroke-color="#72ceff">
+          <span slot="txt">
+            <span style="font-size: 60rpx">
+              {{percent}}%
+            </span>
+            <br>
+            <span style="color: silver;font-size: 30rpx">正确率</span>
+          </span>
+          </CircleProgress>
+        </div>
       </i-col>
     </i-row>
     <i-row>
-      <i-col span="24" i-class="col-class text point-text-top">挑战{{status}}</i-col>
+      <!--<i-col span="24" i-class="col-class text point-text-top">挑战{{status}}</i-col>-->
       <!--<i-col span="24" i-class="col-class text">奖励已发放之您的账户，请稍后查收</i-col>-->
-      <i-col span="24" i-class="col-class text">另外您将获得 {{point}} 积分奖励！</i-col>
+      <i-col span="24" i-class="col-class text">挑战{{status}},另外您将获得<b style="color:#8c99fc;display: inline">{{point}}</b>积分奖励！</i-col>
     </i-row>
     <i-row>
-      <i-col offset="8" span="8" i-class="col-class share-button">
-        <i-button @click="toexplantion()" type="primary" long="true" size	="large" i-class="buttonAnswer">查看解析</i-button>
-      </i-col>
+      <!--<i-col offset="3" span="16" i-class="col-class share-button">-->
+        <image class='picture img-button' @click="toexplantion()"  src='/static/images/analysis.png' style="margin-top: 120rpx"/>
+        <!--<i-button @click="toexplantion()" type="primary" long="true" size	="large" i-class="buttonAnswer">查看解析</i-button>-->
+      <!--</i-col>-->
     </i-row>
     <i-row>
-      <i-col offset="8" span="8" i-class="col-class share-button">
-        <i-button type="primary" open-type="share">分享</i-button>
-      </i-col>
+
+      <button class="img-button3" open-type="share" style="">
+        <image class='img-button2' src='/static/images/share.png'/>
+      </button>
+      <!--</i-col>-->
     </i-row>
   </div>
 </template>
 
 <script>
+  import CircleProgress from 'mini-circleprogress'
   export default {
     onShareAppMessage: function () {
       return {
@@ -44,7 +57,7 @@
         percent: null,
         point: null,
         status:'成功',
-        lesson_id:null
+        lesson_id:null,
       }
     },
     onUnload: function () {
@@ -52,32 +65,31 @@
       wx.reLaunch({url})
     },
     onLoad: function (options) {
-    	 this.lesson_id = options['id'],
+      this.lesson_id = options['id']
       this.getExaminationResult(options['id'])
     },
-    
-    components: {},
-    mounted () {
-    },
+    components: {CircleProgress},
+
+    mounted () {},
     methods: {
-    	toexplantion() {
-      const url = '../lessonExplantion/main?id=' +this.lesson_id
-      wx.navigateTo({ url })
-    },
+      toexplantion () {
+        const url = '../lessonExplantion/main?id=' + this.lesson_id
+        wx.navigateTo({ url })
+      },
       getExaminationResult (id) {
         this.api.v1.examination.result({
           id: id
         }).then((res) => {
           this.percent = res.data.user_lesson_right_percent
+          this.percent = this.percent / 100
+          console.log(this.percent)
           this.point = res.data.user_lesson_point
-          if(res.data.user_lesson_right_percent<60)
-          {      
-          this.status='失败'
+          if (this.percent < 0.6) {
+            this.status = '失败'
           }
         })
       }
     },
-
     created () {
       // let app = getApp()
     }
@@ -121,6 +133,47 @@
     margin: 20rpx;
   }
   .share-button {
-    margin-top: 160rpx;
+    margin-top: 50rpx;
+  }
+  .img-button {
+    width:600rpx;
+    height:100rpx;
+    left:50%;
+    margin-left:-300rpx;
+    margin-top: 80rpx;
+    position:relative;
+  }
+
+  .img-button2 {
+    width:600rpx;
+    height:100rpx;
+  }
+
+  .img-button3 {
+    width:600rpx;
+    height:100rpx;
+    left:50%;
+    margin-left:-300rpx;
+    margin-top: 80rpx;
+    position:relative;
+    border: 0;
+    background-color: white;
+    color: white;
+    padding: 0;
+  }
+  .img-button3::after {
+    border: 0;
+  }
+  .contentbox {
+    width: 300rpx;
+    height: 300rpx;
+  }
+
+  .contentbox {
+    width: 400rpx;
+    height: 400rpx;
+    position: relative;
+    left: 50%;
+    margin-left: -200rpx;
   }
 </style>
