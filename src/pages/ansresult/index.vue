@@ -12,7 +12,7 @@
                           stroke-color="#72ceff">
           <span slot="txt">
             <span style="font-size: 60rpx">
-              {{percent}}%
+              {{percentShow}}%
             </span>
             <br>
             <span style="color: silver;font-size: 30rpx">正确率</span>
@@ -55,6 +55,7 @@
     data () {
       return {
         percent: null,
+        percentShow: null,
         point: null,
         status:'成功',
         lesson_id:null,
@@ -80,11 +81,12 @@
         this.api.v1.examination.result({
           id: id
         }).then((res) => {
-          this.percent = res.data.user_lesson_right_percent
-          this.percent = this.percent / 100
+          this.percentShow = res.data.user_lesson_right_percent
+          console.log(this.percentShow)
+          this.percent = this.percentShow / 100
           console.log(this.percent)
           this.point = res.data.user_lesson_point
-          if (this.percent < 0.6) {
+          if (this.percentShow < 60) {
             this.status = '失败'
           }
         })

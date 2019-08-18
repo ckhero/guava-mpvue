@@ -1,29 +1,35 @@
 <template>
   <div>
     <i-row i-class="content">
+      <i-col span="24">
+        <image class="head-bg" src="/static/images/head-bg.png"></image>
+
+      </i-col>
       <i-col offset="1" span="22">
-        <i-row i-class="title-row-style">
-          <i-col span="4">
-            <i-avatar :src="head" size="large" shape="square" i-class="title-avtar" ></i-avatar>
+        <i-row i-class="head-main">
+          <i-col offset="10" span="4">
+            <i-avatar :src="head" size="large" shape="circle" i-class="title-avtar" ></i-avatar>
           </i-col>
-          <i-col offset="1" span="19">
-            <i-row i-class="title-text">
-              <i-col span="20">{{name}}</i-col>
-              <i-col span="4" @click='buttonTap'>
-                <i-icon type="prompt" i-class="title-text" size="24"color="#80848f"  />
-              </i-col>
-            </i-row>
-            <i-row i-class="title-text">
-              <i-col span="8" >打卡：{{sign_day}}</i-col>
-              <i-col span="8">积分：{{point}}</i-col>
-              <i-col span="8" is-link="true">
-                <a href="../ranking/main" target="_blank" style="text-decoration: underline">排名：{{rank}}</a>
-              </i-col>
-            </i-row>
+          <i-col offset="8" span="1" @click='buttonTap'>
+            <i-icon type="prompt" i-class="title-text" size="24"color="#80848f"  />
           </i-col>
+          <i-row>
+            <i-col i-class="head-name" offset="10" span="4" style="text-align: center">
+              {{name}}
+            </i-col>
+          </i-row>
+          <i-row i-class="head-bottom">
+            <i-col span="7" offset="2">打卡：<span class="text-color">{{sign_day}}</span></i-col>
+            <i-col span="7">积分：<span class="text-color">{{point}}</span></i-col>
+            <i-col span="7" is-link="true">
+              <a href="../ranking/main" target="_blank" style="text-decoration: none">排名：<span class="text-color">{{rank}}</span></a>
+            </i-col>
+          </i-row>
         </i-row>
-        <i-row i-class="notice-bar">
-          <i-notice-bar icon="systemprompt">
+      </i-col>
+      <i-col offset="1" span="22">
+        <i-row i-class="notice-bar" >
+          <i-notice-bar icon="systemprompt" i-class="notice-bar-i" style="background-color: white">
             <a href="../lessonlists/main">点击获取最新的学习资料</a>
           </i-notice-bar>
         </i-row>
@@ -46,17 +52,34 @@
             <i-col span="24"><a href="../singleclass/main?id=3">{{logic.done}}/{{logic.total}}</a></i-col>
           </i-col>
         </i-row>
-        <i-row i-class="today-processing">
-          <i-col span="12" offset="6" @click="switchtostudy">
-            <div class="circle circle-blue"></div>
-            <div class="circle circle-gray">
-              <i-col offset="3" span="18" i-class="circle-text circle-text-up">
-                今日课程
+        <i-row>
+          <i-cell-group>
+            <i-cell title="挑战课程" is-link url="../allclass/main" value="全部课程" i-class="middle-bar"></i-cell>
+          </i-cell-group>
+        </i-row>
+        <i-row style="position: relative;" @click="switchtostudy">
+          <i-col span="24">
+            <image class="loading-bg" src="/static/images/loading-bg.png"></image>
+
+          </i-col>
+          <i-col span="24">
+            <i-row i-class="today-loading-main">
+              <i-col offset="1" span="2">0%</i-col>
+              <i-col span="16">
+                <i-progress :percent="percent" hide-info="true" i-class="today-loading" stroke-width="18"></i-progress>
               </i-col>
-              <i-col span="24" i-class="circle-text circle-text-down">
-                {{right_type_num}}/{{type_num}}
+              <i-col span="1" offset="2"> 100%</i-col>
+              <i-col span="24" style="color: silver;text-align: center">
+                <i-row>今日课程完成度
+                <span class="text-color">{{percent}}%</span>
+                </i-row>
               </i-col>
-            </div>
+              <i-col offset="3" span="1" i-class="feiji" :style="[{'left':percentLeft,'position':feijiAbsolute}]">
+                <i-row :style="{left:percentLeft}">
+                  <image style="width: 30rpx;height: 30rpx;" src="/static/images/feiji.png"></image>
+                </i-row>
+              </i-col>
+            </i-row>
           </i-col>
         </i-row>
         <i-row i-class="title-text contact-us">
@@ -113,7 +136,11 @@
         },
 
         right_type_num:null,
-        type_num:null
+        type_num:null,
+        percent:0,
+        percentLeft:"60%",
+        feijiAbsolute:"absolute",
+        feiji_left: {left: "100%"}
       }
     },
 
@@ -131,7 +158,7 @@
     methods: {
       getUserInfo (res) {
         this.api.v1.user.info({}).then(res => {
-        	  
+
           this.name = res.data.name
           this.head = res.data.head_img
           this.point = res.data.point
@@ -147,13 +174,23 @@
       		this.logic=res.data.schedule.logic
       		this.right_type_num=res.data.today.right_type_num
       		this.type_num=res.data.today.type_num
+          this.percent = parseFloat(this.right_type_num / this.type_num).toFixed(2) * 100
+
+          let tmpAll = 100 / 24 * 22
+          this.percentLeft = (parseFloat(tmpAll / 24 * (18 * this.percent / 100 + 2) + 100 / 24).toFixed(2)) + "%"
+          // this.percent = parseFloat(1/3).toFixed(2)
+      		console.log("tmp", tmpAll/24)
+      		console.log(18 * this.percent / 100 + 3)
+      		console.log((18 * this.percent / 100 + 3) * (tmpAll/24))
+      		console.log(this.percentLeft)
+      		console.log(this.percent)
       		console.log(res)
-      		
+
       	})
       },
 
       switchtostudy () {
-      	
+
         const url = '../learn/main?id=11'
         wx.navigateTo({ url })
       },
@@ -190,7 +227,56 @@
 </script>
 
 <style>
+  .feiji {
+    /*left:30%;*/
+    position:absolute;
+    margin-top:10rpx;
+  }
+  .loading-bg {
+    width: 100%;
+    height: 300rpx;
+  }
+  .notice-bar-i {
+    background-color: white !important;
+    color: black !important;
+  }
+  .head-bottom {
+    position: relative;
+    margin-top: 30rpx;
+  }
+  .head-name {
+    position: relative;
+    margin-top: 30rpx;
+  }
+  .head-bg {
+    width: 100%;
+    height:240rpx;
+    min-height:100rpx;
+    position: relative;
 
+  }
+  .head-main {
+    height: 240rpx;
+    position: relative;
+    margin-top: -120rpx;
+    background-color: white;
+    border: silver;
+    border-radius: 10rpx;
+  }
+  .text-color {
+    color: #ffd650;
+  }
+
+  .today-loading-main {
+    position: relative;
+    /*margin-top: -150rpx;*/
+    color: #ffd650;
+    font-weight: bold;
+    margin-top:-140rpx;
+  }
+  .today-loading {
+    height: 50rpx;
+  }
   .progress_box{
   width:165px;
   height: 165px;
@@ -333,12 +419,18 @@ float: left;
   line-height:60rpx;
 }
   .title-avtar {
-    width:120rpx !important;
-    height:120rpx !important;
-    line-height:120rpx !important;
+    width:140rpx !important;
+    height:140rpx !important;
+    line-height:140rpx !important;
+    border-radius:70rpx !important;
+    left: 50%;
+    margin-left: -70rpx;
+    margin-top: -70rpx;
+    position: relative;
   }
   .content {
     margin-top: 15rpx;
+    background-color: #f6f5fa;
   }
   .title-row-style {
     border-bottom:1rpx solid #dddee1;
@@ -349,11 +441,12 @@ float: left;
   }
   .middle-bar {
     padding:24rpx 0rpx !important;
-    border-bottom:1rpx solid #dddee1;
+    background-color: #f6f5fa !important;
+    /*border-bottom:1rpx solid #dddee1;*/
   }
   .lesson-info {
     margin: 15rpx 0rpx;
-    background: linear-gradient(#5cadff, #2b85e4);
+    background: linear-gradient(#7984f9, #7982f6);
     color: white;
     height: 160rpx;
     line-height: 50rpx;
@@ -362,7 +455,7 @@ float: left;
     text-align: center;
   }
   .contact-us {
-    margin-top: 120rpx;
+    /*margin-top: 120rpx;*/
     color:#80848f;
     text-align: center;
   }

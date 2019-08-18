@@ -11,7 +11,8 @@
     "i-avatar": "../../../static/iview/avatar/index",
     "i-divider": "../../../static/iview/divider/index",
     "i-icon": "../../../static/iview/icon/index",
-    "i-notice-bar": "../../../static/iview/notice-bar/index"
+    "i-notice-bar": "../../../static/iview/notice-bar/index",
+    "i-progress": "../../../static/iview/progress/index"
   }
 }
 
